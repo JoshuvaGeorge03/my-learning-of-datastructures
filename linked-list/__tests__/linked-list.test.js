@@ -61,12 +61,12 @@ describe('Going to test linked list data structure', () => {
     it('should create a empty linked list', () => {
         const list = new LinkedList();
         expect(list.toString()).toBe('');
+        expect(list.head).toBeNull();
+        expect(list.tail).toBeNull();
     });
 
-    test('whether appending to the list works well when list is empty', () => {
+    test('whether appending to the list works well', () => {
         const linkedListDataStructure = new LinkedList();
-        expect(linkedListDataStructure.head).toBeNull();
-        expect(linkedListDataStructure.tail).toBeNull();
 
         linkedListDataStructure.append(9);
 
@@ -84,6 +84,38 @@ describe('Going to test linked list data structure', () => {
         expect(linkedListDataStructure.tail.toString()).toBe('383');
 
         expect(linkedListDataStructure.toArray()).toEqual([9, 12, 1112, 383]);
+    });
+
+    it('should prepend items to the list reliably', () => {
+        const list = new LinkedList();
+
+        list.prepend(9);
+
+        expect(list.head).not.toBeNull();
+        expect(list.head.toString()).toBe('9');
+        expect(list.tail.toString()).toBe('9')
+        expect(list.toArray().length).toBe(1);
+
+        list.prepend(8);
+
+        expect(list.head.toString()).toBe('8');
+        expect(list.tail.toString()).toBe('9');
+        expect(list.toArray()).toStrictEqual([8,9]);
+
+        list.prepend(10).prepend(67).prepend(28);
+
+        expect(list.head.toString()).toBe('28');
+        expect(list.tail.toString()).toBe('9');
+        expect(list.toArray()).toEqual([28,67,10,8,9])
+    });
+
+    it('should insert items to the specified index correctly', () => {
+        const list = new LinkedList();
+        list.insertAtIndex(-1, 9)
+        expect(list.head.toString()).toBe('9');
+        expect(list.tail.toString()).toBe('9');
+        expect(list.toArray()).toEqual([9]);
+        expect(() => list.insertAtIndex(9, 10)).toThrow(/index is larger than list length/);
     });
 
 });

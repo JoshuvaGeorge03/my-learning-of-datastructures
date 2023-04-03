@@ -67,13 +67,14 @@ export class LinkedList {
                 data.next = currentNode.next;
                 currentNode.next = data;
             } else {
-                if (this.tail) {
-                    this.tail.next = node;
-                    this.tail = node;
-                } else {
-                    this.head = node;
-                    this.tail = node;
-                }
+                throw new Error('index is larger than list length', index, this.toArray().length);
+                // if (this.tail) {
+                //     this.tail.next = node;
+                //     this.tail = node;
+                // } else {
+                //     this.head = node;
+                //     this.tail = node;
+                // }
             }
         }
         return this;
