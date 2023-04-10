@@ -91,7 +91,6 @@ describe('Doubly Linked List Node Block', () => {
         expect(list.delete(9).toString()).toBe('9');
         expect(list.toString()).toBe('');
         list.append(9).append(20).prepend(38);
-        console.log(list.toString())
         list.delete(38);
         expect(list.toString()).toBe('9,20');
         expect(list.head.toString()).toBe('9');

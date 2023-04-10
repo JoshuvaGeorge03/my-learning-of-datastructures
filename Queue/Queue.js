@@ -1,21 +1,21 @@
-class QueueNode {
+export class QueueNode {
     constructor(data, next) {
         this.data = data;
         this.next = next;
     }
     toString(callback) {
-        callback ? callback(this.data) : `${this.data}`;
+        return callback ? callback(this.data) : `${this.data}`;
     }
 }
 
 
 
-class Queue { // FIFO (First In First Out)
+export class Queue { // FIFO (First In First Out)
     head = null; // remove data from here
     tail = null; // add data to here
-    constructor(head, tail) {
-        this.head = head;
-        this.tail = tail;
+    constructor() {
+        // this.head = head;
+        // this.tail = tail;
     }
     enqueue(data) {
         const node = new QueueNode(data)
@@ -37,13 +37,27 @@ class Queue { // FIFO (First In First Out)
         if(this.tail === this.head) {
             this.tail = null;
         }
-        this.head = this.head.next;
-        return toBeDeletedNode
+        this.head = this.head.next || null;
+        return toBeDeletedNode;
     }
     isEmpty() {
-        return Boolean(this.head);
+        return Boolean(!this.head);
     }
     peek() {
         return this.head ? this.head.data : null;
+    }
+
+    toArray() {
+        let currentNode = this.head;
+        const queueNodes = [];
+        while(currentNode) {
+            queueNodes.push(currentNode);
+            currentNode = currentNode.next;
+        }
+        return queueNodes;
+    }
+
+    toString() {
+        return this.toArray().map(node => node.toString()).toString();
     }
 }
