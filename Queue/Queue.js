@@ -83,4 +83,11 @@ export class QueueWithLinkedList extends LinkedList {
         if(this.isEmpty()) return null;
         return this.head.data
     }
+    toArray() {
+        return super.toArray();
+    }
+
+    toString() {
+        return super.toArray().map(node => node.toString()).toString();
+    }
 }
