@@ -72,7 +72,7 @@ describe('Going to test linked list data structure', () => {
 
         expect(linkedListDataStructure.head.toString()).toBe('9');
         expect(linkedListDataStructure.tail.toString()).toBe('9');
-        expect(linkedListDataStructure.append(12).toArray()).toEqual([9, 12]);
+        expect(linkedListDataStructure.append(12).toString()).toEqual('9,12');
 
         expect(linkedListDataStructure.head.toString()).toBe('9');
         expect(linkedListDataStructure.tail.toString()).toBe('12');
@@ -83,7 +83,7 @@ describe('Going to test linked list data structure', () => {
         expect(linkedListDataStructure.head.toString()).toBe('9');
         expect(linkedListDataStructure.tail.toString()).toBe('383');
 
-        expect(linkedListDataStructure.toArray()).toEqual([9, 12, 1112, 383]);
+        expect(linkedListDataStructure.toString()).toEqual('9,12,1112,383');
     });
 
     it('should prepend items to the list reliably', () => {
@@ -100,13 +100,13 @@ describe('Going to test linked list data structure', () => {
 
         expect(list.head.toString()).toBe('8');
         expect(list.tail.toString()).toBe('9');
-        expect(list.toArray()).toStrictEqual([8,9]);
+        expect(list.toString()).toStrictEqual([8,9].toString());
 
         list.prepend(10).prepend(67).prepend(28);
 
         expect(list.head.toString()).toBe('28');
         expect(list.tail.toString()).toBe('9');
-        expect(list.toArray()).toEqual([28,67,10,8,9])
+        expect(list.toString()).toEqual([28,67,10,8,9].toString())
     });
 
     it('should insert items to the specified index correctly', () => {
@@ -114,7 +114,7 @@ describe('Going to test linked list data structure', () => {
         list.insertAtIndex(-1, 9)
         expect(list.head.toString()).toBe('9');
         expect(list.tail.toString()).toBe('9');
-        expect(list.toArray()).toEqual([9]);
+        expect(list.toString()).toEqual([9].toString());
         expect(() => list.insertAtIndex(9, 10)).toThrow(/index is larger than list length/);
     });
 

@@ -1,3 +1,5 @@
+import { LinkedList } from '../linked-list/linked-list'
+
 export class QueueNode {
     constructor(data, next) {
         this.data = data;
@@ -19,22 +21,22 @@ export class Queue { // FIFO (First In First Out)
     }
     enqueue(data) {
         const node = new QueueNode(data)
-        if(this.tail) {
+        if (this.tail) {
             this.tail.next = node;
         }
         this.tail = node;
-        if(!this.head) {
+        if (!this.head) {
             this.head = node;
         }
         return this;
     }
     dequeue() {
-        if(!this.head) {
+        if (!this.head) {
             return null;
         }
 
         const toBeDeletedNode = this.head;
-        if(this.tail === this.head) {
+        if (this.tail === this.head) {
             this.tail = null;
         }
         this.head = this.head.next || null;
@@ -50,7 +52,7 @@ export class Queue { // FIFO (First In First Out)
     toArray() {
         let currentNode = this.head;
         const queueNodes = [];
-        while(currentNode) {
+        while (currentNode) {
             queueNodes.push(currentNode);
             currentNode = currentNode.next;
         }
@@ -59,5 +61,26 @@ export class Queue { // FIFO (First In First Out)
 
     toString() {
         return this.toArray().map(node => node.toString()).toString();
+    }
+}
+
+export class QueueWithLinkedList extends LinkedList {
+    constructor() {
+        super();
+    }
+    enqueue(data) {
+        return this.append(data);
+    }
+    dequeue() {
+        if(this.isEmpty()) return null;
+        const removedHead = this.deleteHead();
+        return removedHead ? removedHead.data : null;
+    }
+    isEmpty() {
+        return !Boolean(this.head)
+    }
+    peek() {
+        if(this.isEmpty()) return null;
+        return this.head.data
     }
 }

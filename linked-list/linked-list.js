@@ -208,7 +208,7 @@ export class LinkedList {
         const linkedListNodeArr = []
         
         function collectNode(index, currentNode) {
-            linkedListNodeArr.push(currentNode.data);
+            linkedListNodeArr.push(currentNode);
         }
 
         this.traverse(collectNode);
