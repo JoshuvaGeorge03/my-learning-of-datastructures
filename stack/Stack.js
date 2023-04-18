@@ -1,3 +1,5 @@
+import { LinkedList } from '../linked-list/linked-list';
+
 export class StackNode {
     constructor(data, next = null) {
         this.data = data;
@@ -9,34 +11,34 @@ export class StackNode {
 }
 
 export class Stack {
-    top = null;
+    head = null;
 
     push(data) {
-        const stackNode = new StackNode(data, this.top);
-        this.top = stackNode;
+        const stackNode = new StackNode(data, this.head);
+        this.head = stackNode;
         return this;
     }
 
     pop() {
-        if(this.isEmpty()) return null;
-        const toBeDeletedNode = this.top;
-        this.top = this.top.next;
+        if (this.isEmpty()) return null;
+        const toBeDeletedNode = this.head;
+        this.head = this.head.next;
         return toBeDeletedNode;
     }
 
     peek() {
-        if(this.isEmpty()) return null;
-        return this.top.data;
+        if (this.isEmpty()) return null;
+        return this.head.data;
     }
 
     isEmpty() {
-        return !this.top;
+        return !this.head;
     }
 
     toArray() {
-        let currentHead = this.top;
+        let currentHead = this.head;
         const stackArray = [];
-        while(currentHead) {
+        while (currentHead) {
             stackArray.push(currentHead);
             currentHead = currentHead.next;
         }
@@ -45,5 +47,36 @@ export class Stack {
 
     toString() {
         return this.toArray().map(node => node.toString()).toString();
+    }
+}
+
+export class StackWithLinkedListImpl extends LinkedList {
+
+    push(data) {
+        this.prepend(data);
+        return this;
+    }
+
+    pop() {
+        if(this.isEmpty()) return null
+        const node = this.deleteHead();
+        return node ? node.data : null;
+    }
+    
+    isEmpty() {
+        return !this.head;
+    }
+
+    peek() {
+        if(this.isEmpty()) return null;
+        return this.head.data;
+    }
+
+    toArray() {
+        return super.toArray();
+    }
+
+    toString() {
+        return super.toString();
     }
 }
