@@ -7,6 +7,7 @@ class HashTable {
       .fill(null)
       .map(() => new LinkedList());
       this.hashTableSize = hashTableSize;
+      this.keys = {};
   }
 
   hashCodeGenerate(codeString) {
@@ -14,7 +15,7 @@ class HashTable {
     for(let i = 0; i < codeString.length; i++) {
       sum += codeString.charCodeAt(i)
     }
-    return sum;
+    return sum + codeString.length;
   }
 
   convertHashCodeToIndex(hashCode) {
@@ -34,5 +35,13 @@ class HashTable {
 
   has(key) {
     
+  }
+
+  getKeys() {
+
+  }
+
+  getValues() {
+
   }
 }
