@@ -12,6 +12,22 @@ export class HashTable {
     this.keys = {};
   }
 
+  allowedKeyTypes() {
+    return ["string"];
+  }
+
+  checkWhetherTheKeyIsOfSupportedType(key) {
+    return this.allowedKeyTypes().includes(getTypeOf(key));
+  }
+
+  notSupportedTypeError() {
+    return "not an supported type of keys, please use string as keys";
+  }
+
+  noKeyExistError() {
+    return "no value for this key have been assigned before.";
+  }
+
   hashCodeGenerate(codeString) {
     let sum = 0;
     for (let i = 0; i < codeString.length; i++) {
@@ -24,17 +40,13 @@ export class HashTable {
     return hashCode % this.hashTableSize;
   }
 
-  allowedKeyTypes() {
-    return ["string"];
-  }
-
   get(key) {
-    if (!this.allowedKeyTypes().includes(getTypeOf(key))) {
-      throw "not an supported type of keys, please use string as keys";
+    if (!this.checkWhetherTheKeyIsOfSupportedType(key)) {
+      throw this.notSupportedTypeError();
     }
 
     if (!this.keys[key]) {
-      throw "no value for this key have been assigned before.";
+      throw this.noKeyExistError();
     }
     const hashCode = this.hashCodeGenerate(key);
     const index = this.convertHashCodeToIndex(hashCode);
@@ -47,6 +59,10 @@ export class HashTable {
   }
 
   set(key, value) {
+    if(!this.checkWhetherTheKeyIsOfSupportedType(key)) {
+      throw this.notSupportedTypeError();
+    }
+
     const hashCode = this.convertHashCodeToIndex(this.hashCodeGenerate(key));
     this.keys[key] = hashCode;
 
@@ -74,11 +90,34 @@ export class HashTable {
     }
   }
 
-  delete(key) {}
+  delete(key) {
+    if(!this.checkWhetherTheKeyIsOfSupportedType(key)) {
+      throw this.notSupportedTypeError();
+    }
 
-  has(key) {}
+    if(!this.keys[key]) {
+      throw this.noKeyExistError();
+    }
+    
+    delete this.keys[key];
 
-  getKeys() {}
+    const hashCode = this.convertHashCodeToIndex(this.hashCodeGenerate(key));
+    const linkedListNode = this.hashTable[hashCode].find((index, node) => node.data.key === key);
+    this.hashTable[hashCode].deleteWithIndex(linkedListNode.currentIndex);
+    return linkedListNode.currentNode.data.value;
+  }
 
-  getValues() {}
+  has(key) {
+    return Object.hasOwn(this.keys, key);
+  }
+
+  getKeys() {
+    return Object.keys(this.keys)
+  }
+
+  getValues() {
+    return this.hashTable.reduce((accumulator, linkedList) => {
+      return accumulator.concat(linkedList.toArray());
+    }, []).map(listNode => listNode.data.value);
+  }
 }
