@@ -1,6 +1,6 @@
 # my-learning-of-datastructures
 
-### Data Structure
+## Data Structure
 This is about organizing data, so that, we can access and modify or query it later more efficiently and easily. or we can say, it means collection of data elements and relationship among them and operation or function that we can perform on them.
 
 ### Why Data Structures?
@@ -58,3 +58,17 @@ For this function, O(n) will be
 O(f(n)) = O(n**3) // because, n cube is biggest factor contributing to the time. so, O(n) is calculated based on that.
 
 To find out Big(0) complexity of the algorithm, find f(n) of the algorithm and remove constants and multiple factors and only consider worst case to derive Big(0) notation.
+
+## Common Data Structure
+
+### Static Array And Dynamic Arrays:
+
+-> Fundamental Data structure, because using arrays and pointers, we can build up any data structure.
+
+Static Array -> fixed length container consist of collection of elements, which are indexable, starts from 0 to n-1 both are inclusive, [0, n-i]
+
+Indexable -> This means every slot/index of arrays referenced with a number starting from 0. contiguous memory addresses.
+
+There is no other way to access elements in array then using a index. ex:) even in forEach, index based access is done internally.
+
+access -> o(1) search(what if elements did not present), deletion(same like insertion, worst case scenarion, we have to copy and reshift everyting), insertion(because we have to reshift everything to the other memory address, copyting and shifting) -> o(1) appending -> o(1)
