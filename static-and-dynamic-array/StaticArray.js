@@ -44,4 +44,8 @@ export class StaticArray {
     isEmpty() {
         return this.getSize() === 0;
     }
+
+    toString() {
+        return this.getValues().filter(Boolean).toString();
+    }
 }
