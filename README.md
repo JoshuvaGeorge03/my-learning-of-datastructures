@@ -72,3 +72,12 @@ Indexable -> This means every slot/index of arrays referenced with a number star
 There is no other way to access elements in array then using a index. ex:) even in forEach, index based access is done internally.
 
 access -> o(1) search(what if elements did not present), deletion(same like insertion, worst case scenarion, we have to copy and reshift everyting), insertion(because we have to reshift everything to the other memory address, copyting and shifting) -> o(1) appending -> o(1)
+
+### Linked list
+
+-> sequential list of nodes, where each node contains data and pointer/reference to other data. and last node points to null, which is called sentinel node.
+
+-> doubly linked list is kind of same like linked list, which is sequential list of nodes, where each node contains data and pointer/reference to previous/next node.
+
+
+### Stack
