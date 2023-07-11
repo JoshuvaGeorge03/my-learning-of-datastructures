@@ -81,3 +81,10 @@ access -> o(1) search(what if elements did not present), deletion(same like inse
 
 
 ### Stack
+-> It is a one ended linear data structure, which simulates a real world stack using two primary functions namely, push and pop.
+
+-> also called LIFO (last in fast out);
+
+-> In stack data structure, every operation done on the top of the stack, and we only have control over the top of the stack and not on anything else.
+
+ex: finding brackets and braces matching in a syntax. and tower of hanoi games.

@@ -52,6 +52,14 @@ export class DynamicArray {
     return this.list.map(v => v);
   }
 
+  getSize() {
+    return this.list.length;
+  }
+
+  isEmpty() {
+    return Boolean(this.getSize());
+  }
+
   toString() {
     return this.list.toString();
   }
