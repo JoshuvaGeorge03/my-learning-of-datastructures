@@ -61,6 +61,9 @@ To find out Big(0) complexity of the algorithm, find f(n) of the algorithm and r
 
 ## Common Data Structure
 
+```
+when implementing data structure, always look out for memory leaks and concurrent modifications realted problem.
+```
 ### Static Array And Dynamic Arrays:
 
 -> Fundamental Data structure, because using arrays and pointers, we can build up any data structure.
@@ -87,4 +90,17 @@ access -> o(1) search(what if elements did not present), deletion(same like inse
 
 -> In stack data structure, every operation done on the top of the stack, and we only have control over the top of the stack and not on anything else.
 
-ex: finding brackets and braces matching in a syntax. and tower of hanoi games.
+ex: finding brackets and braces matching in a syntax. and tower of hanoi games. depth first traversal.
+
+### Queue
+-> Queue is a linear data structure, which simulates a relad world queue using tow function namely enqueue, dequeue.
+
+-> enqueue also called offering, adding to the back of the queue.
+
+-> dequeue also called polling, removing from front of the queue.
+
+-> In this data structure, operation are performed on the both end of the stack.
+
+-> This also called FIFO (First In First Out)
+
+ex: web server serving web request can implement a queue to process req as it comes. breadth first traversal.

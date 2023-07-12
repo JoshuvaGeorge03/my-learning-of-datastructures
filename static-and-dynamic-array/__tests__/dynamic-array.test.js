@@ -28,4 +28,6 @@ describe('checking the functionality of dynamic array', () => {
         expect(() => myDynamicArray.updateValue(100)).toThrow(/larger/);
         expect(() => myDynamicArray.updateValue(-999)).toThrow(/negative/);
     });
+
+    
 })
