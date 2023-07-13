@@ -93,7 +93,7 @@ access -> o(1) search(what if elements did not present), deletion(same like inse
 ex: finding brackets and braces matching in a syntax. and tower of hanoi games. depth first traversal.
 
 ### Queue
--> Queue is a linear data structure, which simulates a relad world queue using tow function namely enqueue, dequeue.
+-> Queue is a linear data structure, which simulates a relad world queue using two function namely enqueue, dequeue.
 
 -> enqueue also called offering, adding to the back of the queue.
 
