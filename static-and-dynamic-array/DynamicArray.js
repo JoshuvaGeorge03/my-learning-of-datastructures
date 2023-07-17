@@ -35,7 +35,7 @@ export class DynamicArray {
 
   removeAt(index) {
     if (index >= this.list.length || index < 0) return this.throwOutOfBoundaryException();
-    this.list = [...this.list.splice(index, 1)];
+    this.list = [...this.list.slice(0, index), ...this.list.slice(index + 1)];
     this.currentLength -= 1;
   }
 

@@ -51,4 +51,12 @@ describe("checking the functionality of dynamic array", () => {
     expect(myArray.getSize()).toBe(4);
   });
 
+  it('should remove the values from the array based on index', () => {
+    let myArray = new DynamicArray(2);
+    myArray.removeAt(0);
+    expect(myArray.getSize()).toBe(1);
+    myArray.removeAt(0);
+    expect(myArray.getSize()).toBe(0);
+  });
+
 });
