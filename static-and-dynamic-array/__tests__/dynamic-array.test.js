@@ -57,6 +57,10 @@ describe("checking the functionality of dynamic array", () => {
     expect(myArray.getSize()).toBe(1);
     myArray.removeAt(0);
     expect(myArray.getSize()).toBe(0);
+    expect(() => myArray.removeAt(0)).toThrow(/larger/);
+    myArray.add(1);
+    expect(myArray.getValue(0)).toBe(1);
   });
+
 
 });

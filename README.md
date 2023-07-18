@@ -104,3 +104,23 @@ ex: finding brackets and braces matching in a syntax. and tower of hanoi games. 
 -> This also called FIFO (First In First Out)
 
 ex: web server serving web request can implement a queue to process req as it comes. breadth first traversal.
+
+### Priority Queue 
+-> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
+
+-> it is kinda like normal queue, but each element in the queue has certain priority. and priority of the elements in the queue, determine the order in whihc elements are removed from the queue.
+
+-> One thing to keep remember is, priority queues only support data that are comparable, means the inserted data should be ordered in least to greatest or in greatest to least way. Why? because, then only, we can assign relative priority to this.
+
+ -> it contains, same set of operation as queue, but it polls high priority elements from the queue and add to the queue based on priority.
+
+ -> how priority queue know, which element to remove, does it reset all element each time polling. nope, it uses heap Data strucuture to do this.
+
+ -> Heap is tree based Data strucuture, which satisfies heap invariant (also called heap property), heap property indicates values of the parent node ia always greater than or equal to value of all child nodes Or else value of parent node is lesser than or equal to all child nodes. so, dud to this, we end up getting two heap 
+
+ 1) Max heap -> parent node have greatest value than all child nodes
+ 2) Min heap -> parent node have lessest value than all child nodes.
+
+ Binary heap indicates if every node has exactly two child, binomial heap means nodes have variable number of childs
+
+ Note: all heaps must be trees, no cycle should be present.

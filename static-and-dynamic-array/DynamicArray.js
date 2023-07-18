@@ -23,6 +23,7 @@ export class DynamicArray {
   }
 
   add(value) {
+    console.log('value', value, this.currentLength, this.list.length);
     if (this.currentLength < this.list.length) {
       this.list[this.currentLength] = value;
       this.currentLength += 1;
@@ -36,7 +37,7 @@ export class DynamicArray {
   removeAt(index) {
     if (index >= this.list.length || index < 0) return this.throwOutOfBoundaryException();
     this.list = [...this.list.slice(0, index), ...this.list.slice(index + 1)];
-    this.currentLength -= 1;
+    this.currentLength = this.currentLength > 0 ? this.currentLength - 1 : this.currentLength;
   }
 
   remove(value) {
