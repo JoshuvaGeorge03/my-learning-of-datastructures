@@ -25,7 +25,7 @@ export class HashTable {
   }
 
   noKeyExistError() {
-    return "no value for this key have been assigned before.";
+    return "key not assigned before.";
   }
 
   hashCodeGenerate(codeString) {

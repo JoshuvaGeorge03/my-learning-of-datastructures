@@ -116,7 +116,7 @@ ex: web server serving web request can implement a queue to process req as it co
 
  -> how priority queue know, which element to remove, does it reset all element each time polling. nope, it uses heap Data strucuture to do this.
 
- -> Heap is tree based Data strucuture, which satisfies heap invariant (also called heap property), heap property indicates values of the parent node ia always greater than or equal to value of all child nodes Or else value of parent node is lesser than or equal to all child nodes. so, dud to this, we end up getting two heap 
+ -> Heap is tree based Data strucuture, which satisfies heap invariant (also called heap property), heap property indicates values of the parent node ia always greater than or equal to value of all child nodes Or else value of parent node is lesser than or equal to all child nodes. so, due to this, we end up getting two heap.
 
  1) Max heap -> parent node have greatest value than all child nodes
  2) Min heap -> parent node have lessest value than all child nodes.
@@ -124,3 +124,8 @@ ex: web server serving web request can implement a queue to process req as it co
  Binary heap indicates if every node has exactly two child, binomial heap means nodes have variable number of childs
 
  Note: all heaps must be trees, no cycle should be present.
+
+Converting Min PQ to Max PQ and vice versa
+ To turn Min PQ to Max PQ, why we do that? because, most times, we will have min PQ or max PQ, so, we should find a way to convert it into other PQ.
+
+ To do that, we can abuse the fact, every elements in priority queue is comparable data, so they must implement a some comparable interface, which we can simply negate to attain alternate version of PQ by doing this when adding and polling.
