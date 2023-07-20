@@ -23,15 +23,14 @@ export class DynamicArray {
   }
 
   add(value) {
-    console.log('value', value, this.currentLength, this.list.length);
-    const futureCurrentLength = this.currentLength + 1;
+    const futureCurrentLength = this.currentLength;
     if (futureCurrentLength < this.list.length) {
       this.list[this.currentLength] = value;
     } else {
       this.list = [...this.list, ...Array(this.list.length).fill(null)];
       this.list[this.currentLength] = value;
     }
-    this.currentLength = futureCurrentLength;
+    this.currentLength = futureCurrentLength + 1;
   }
 
   removeAt(index) {

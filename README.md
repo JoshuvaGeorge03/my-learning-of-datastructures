@@ -76,7 +76,7 @@ There is no other way to access elements in array then using a index. ex:) even 
 
 access -> o(1) search(what if elements did not present), deletion(same like insertion, worst case scenarion, we have to copy and reshift everyting), insertion(because we have to reshift everything to the other memory address, copyting and shifting) -> o(1) appending -> o(1)
 
-### Linked list
+### Linked list && Doubly Linked list
 
 -> sequential list of nodes, where each node contains data and pointer/reference to other data. and last node points to null, which is called sentinel node.
 
@@ -105,6 +105,21 @@ ex: finding brackets and braces matching in a syntax. and tower of hanoi games. 
 
 ex: web server serving web request can implement a queue to process req as it comes. breadth first traversal.
 
+
+### Heap
+
+Heap is specialized tree based data structure which satisfies the heap property.
+
+-> Heap is tree based Data strucuture, which satisfies heap invariant (also called heap property), heap property indicates values of the parent node is always greater than or equal to value of all child nodes Or else value of parent node is lesser than or equal to all child nodes. so, due to this, we end up getting two heap.
+
+ 1) Max heap -> parent node have greatest value than all child nodes (if p is parent node of c, than c is less than or equal to p)
+ 2) Min heap -> parent node have lessest value than all child nodes. (if p is parent node of c, than c is greater than or equal to c)
+
+ Binary heap indicates if every node has exactly two child, binomial heap means nodes have variable number of childs
+
+ Note: all heaps must be trees, no cycle should be present.
+
+
 ### Priority Queue 
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
 
@@ -116,16 +131,11 @@ ex: web server serving web request can implement a queue to process req as it co
 
  -> how priority queue know, which element to remove, does it reset all element each time polling. nope, it uses heap Data strucuture to do this.
 
- -> Heap is tree based Data strucuture, which satisfies heap invariant (also called heap property), heap property indicates values of the parent node ia always greater than or equal to value of all child nodes Or else value of parent node is lesser than or equal to all child nodes. so, due to this, we end up getting two heap.
-
- 1) Max heap -> parent node have greatest value than all child nodes
- 2) Min heap -> parent node have lessest value than all child nodes.
-
- Binary heap indicates if every node has exactly two child, binomial heap means nodes have variable number of childs
-
- Note: all heaps must be trees, no cycle should be present.
-
 Converting Min PQ to Max PQ and vice versa
  To turn Min PQ to Max PQ, why we do that? because, most times, we will have min PQ or max PQ, so, we should find a way to convert it into other PQ.
 
  To do that, we can abuse the fact, every elements in priority queue is comparable data, so they must implement a some comparable interface, which we can simply negate to attain alternate version of PQ by doing this when adding and polling.
+
+ As we already said, priroity queue is Abstract Data Type(ADT), so it can be implemented in any DS(Data Structure), but we are using heap to implement it. because, it obtains us best time complexity. but we can implement the same with unordered list also, but in that case, time complexity becomes harder.
+
+ so only sometimes, prirority queues are often called, heaps. but that's not technically correct.
