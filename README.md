@@ -119,6 +119,36 @@ Heap is specialized tree based data structure which satisfies the heap property.
 
  Note: all heaps must be trees, no cycle should be present.
 
+ There are multiple types of heap, which are
+ 1) Binary Heap, 2) Fibonacci heap 3) Binomial Heap 4) Pairing Heap 5) Leftist heap 6) Brodal Heap 7) Rank Pairing Heap 8)Strict Fibonacci Heap 9) 2-3 Heap.
+
+ **Binary Heap**
+It is a Binary Tree which follows heap invariant, where every node in the tree has two children.
+
+Import part of the implementation in binary tree is complete binary tree property, which indicates the tree in which every level is completely filled as far left as possible. why this is important is? it gives us the insertion point, no matter how the tree looks like, we always start inserting values from the inserting point and check whether heap property followed and do insertion.
+
+insertion point is always bottom row of heap and left most part if it is empty, otherwise new row is formed.
+
+How to represent these heap, we can visually, see them as tree like structure, but for computer to understand, how we can represent these heap internally?
+Heap tree visual represenation vs heap tree internal code representation.
+
+            9
+
+        8       7
+
+    5       6
+
+index tree 0  1 2 3 4
+
+heap value 9  8 7 5 6
+
+we are using array to represent binary heaps, and due to this, we can always say insertion point is last item of the array and root node is initial index of the array. and we can also use object and pointers, but array is simple and so fast.
+
+let i be the parent node of the index.
+and left child index can be calculated using = 2i + 1 and right child index can be calculated using 2i + 2. (zero based)
+
+How adding to the heap works?
+when adding, we will always add the value in the inserion point and check for whether the heap invariant satisfied, if so, leave as that is, if not, we will do a bubbling-up/shifting-up/swimming to traverse to the top of the heap untill heap invariant satisfied.
 
 ### Priority Queue 
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
