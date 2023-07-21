@@ -36,7 +36,8 @@ export class HashTable {
     return sum + codeString.length;
   }
 
-  convertHashCodeToIndex(hashCode) {
+  convertHashCodeToIndex(key) {
+    const hashCode = this.hashCodeGenerate(key);
     return hashCode % this.hashTableSize;
   }
 
@@ -48,8 +49,7 @@ export class HashTable {
     if (!this.keys[key]) {
       throw this.noKeyExistError();
     }
-    const hashCode = this.hashCodeGenerate(key);
-    const index = this.convertHashCodeToIndex(hashCode);
+    const index = this.convertHashCodeToIndex(key);
     const hashTableLinkedList = this.hashTable[index];
 
     const listNodeWhichContainsValueForTheSpecifiedKey =
@@ -63,7 +63,7 @@ export class HashTable {
       throw this.notSupportedTypeError();
     }
 
-    const hashCode = this.convertHashCodeToIndex(this.hashCodeGenerate(key));
+    const hashCode = this.convertHashCodeToIndex(key);
     this.keys[key] = hashCode;
 
     const hashTableLinkedList = this.hashTable[hashCode];
@@ -101,7 +101,7 @@ export class HashTable {
     
     delete this.keys[key];
 
-    const hashCode = this.convertHashCodeToIndex(this.hashCodeGenerate(key));
+    const hashCode = this.convertHashCodeToIndex(key);
     const linkedListNode = this.hashTable[hashCode].find((index, node) => node.data.key === key);
     this.hashTable[hashCode].deleteWithIndex(linkedListNode.currentIndex);
     return linkedListNode.currentNode.data.value;
