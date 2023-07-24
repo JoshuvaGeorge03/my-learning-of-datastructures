@@ -141,4 +141,8 @@ export class HashTable {
       return accumulator.concat(linkedList.toArray());
     }, []).map(listNode => listNode.data.value);
   }
+
+  toString(stringfierFunc) {
+    return stringfierFunc ? this.getValues().map(value => stringfierFunc(value)).toString() : this.getValues().toString();
+  }
 }
