@@ -28,6 +28,10 @@ export class HashTable {
     return "key not assigned before.";
   }
 
+  notAnValidKeyError() {
+    return 'pass a key to do the processing';
+  }
+
   hashCodeGenerate(codeString) {
     let sum = 0;
     for (let i = 0; i < codeString.length; i++) {
@@ -42,6 +46,10 @@ export class HashTable {
   }
 
   get(key) {
+    if(!key) {
+      throw this.notAnValidKeyError();
+    }
+
     if (!this.checkWhetherTheKeyIsOfSupportedType(key)) {
       throw this.notSupportedTypeError();
     }
@@ -59,6 +67,11 @@ export class HashTable {
   }
 
   set(key, value) {
+
+    if(!key) {
+      throw this.notAnValidKeyError();
+    }
+
     if(!this.checkWhetherTheKeyIsOfSupportedType(key)) {
       throw this.notSupportedTypeError();
     }
@@ -69,28 +82,36 @@ export class HashTable {
     const hashTableLinkedList = this.hashTable[hashCode];
     if (hashTableLinkedList) {
       const isCurrentKeyAlreadyPresentLinkedList = hashTableLinkedList.find(
-        (index, node) => node.data.key === key
+        (index, node) => node.data?.key === key
       );
-      if (isCurrentKeyAlreadyPresentLinkedList) {
+      if (isCurrentKeyAlreadyPresentLinkedList?.currentNode) {
         isCurrentKeyAlreadyPresentLinkedList.currentNode.data = {
           key,
           value,
         };
+        return {success: true, index: hashCode}
       } else {
         hashTableLinkedList.append({
           key,
           value,
         });
+        return {success: true, index: hashCode}
       }
     } else {
       hashTableLinkedList.append({
         key: key,
         value,
       });
+      return {success: true, index: hashCode}
     }
   }
 
   delete(key) {
+
+    if(!key) {
+      throw this.notAnValidKeyError();
+    }
+
     if(!this.checkWhetherTheKeyIsOfSupportedType(key)) {
       throw this.notSupportedTypeError();
     }

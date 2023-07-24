@@ -150,6 +150,8 @@ and left child index can be calculated using = 2i + 1 and right child index can 
 How adding to the heap works?
 when adding, we will always add the value in the inserion point and check for whether the heap invariant satisfied, if so, leave as that is, if not, we will do a bubbling-up/shifting-up/swimming to traverse to the top of the heap untill heap invariant satisfied.
 
+how removing or polling work?
+
 ### Priority Queue 
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
 

@@ -20,4 +20,22 @@ describe('Hash Table lookup Test', () => {
         expect(hashTable.convertHashCodeToIndex('ba')).toBe((98 + 97 + 2) % 2);
     });
 
+
+    test('whether the table get/set/delete operation works well without collision scenario', () => {
+        const hashTable = new HashTable(5);
+
+        expect(() => hashTable.get(33)).toThrow(/not an supported type of keys/);
+        expect(() => hashTable.get('')).toThrow(/pass a key to do the processing/);
+        expect(() => hashTable.get('a')).toThrow(/key not assigned before/);
+
+        expect(() => hashTable.set(33)).toThrow(/not an supported type of keys/);
+        expect(() => hashTable.set('')).toThrow(/pass a key to do the processing/);
+
+        expect(() => hashTable.delete(33)).toThrow(/not an supported type of keys/);
+        expect(() => hashTable.delete('')).toThrow(/pass a key to do the processing/);
+        expect(() => hashTable.delete('a')).toThrow(/key not assigned before/);
+
+        expect(hashTable.set('jos', 89)).toStrictEqual({success: true, index: hashTable.convertHashCodeToIndex('jos')});
+    });
+
 });
