@@ -131,12 +131,15 @@ insertion point is always bottom row of heap and left most part if it is empty, 
 
 How to represent these heap, we can visually, see them as tree like structure, but for computer to understand, how we can represent these heap internally?
 Heap tree visual represenation vs heap tree internal code representation.
+```
 
-            9
+            9                    heap tree  ->  index tree                  0
 
-        8       7
+        8       7                                                       1       2
 
-    5       6
+    5       6                                                       3       4
+
+```
 
 index tree 0  1 2 3 4
 
@@ -147,10 +150,18 @@ we are using array to represent binary heaps, and due to this, we can always say
 let i be the parent node of the index.
 and left child index can be calculated using = 2i + 1 and right child index can be calculated using 2i + 2. (zero based)
 
-How adding to the heap works?
+How adding to the binary heap works?
 when adding, we will always add the value in the inserion point and check for whether the heap invariant satisfied, if so, leave as that is, if not, we will do a bubbling-up/shifting-up/swimming to traverse to the top of the heap untill heap invariant satisfied.
 
-how removing or polling work?
+how removing or polling of binary heap work?
+In generally, with the heap, we always want to remove the root node(one with the highest priority).
+
+when we remove the root, we call it polling, and for removing the root, we don't have to search it index, because, we alreay know, it is at index 0, in our array representation.
+and when we do polling or removing, we will find the index of the element to remove, and swap it with last indexed element, and removed the last index element and checked whether the heap invariant is still satisfied, if not satisfied, we have to do bubbling down/shifting down untill heap invariant is satisfied. now compare parent node with the child node, and select the smallest value node and replace it with the parent node and continue it and if two child nodes are of same value, then always choos the left child node and swap it untill heap invariant is satisfied.
+
+if we need to do removing of node with particular value, then we can initially find a index of element via linear search and then do the above process.
+
+we can also improve time complexity of the removing(due to linear search to find element index), by incorporating hash table, which is providing constant time for lookup and updating mapping of a keys(value of heap node) and values(index of the values preseent in heap, we can use set or tree support multiple values of the index)
 
 ### Priority Queue 
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
