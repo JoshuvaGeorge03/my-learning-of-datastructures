@@ -36,6 +36,28 @@ describe('Hash Table lookup Test', () => {
         expect(() => hashTable.delete('a')).toThrow(/key not assigned before/);
 
         expect(hashTable.set('jos', 89)).toStrictEqual({success: true, index: hashTable.convertHashCodeToIndex('jos')});
+        expect(hashTable.get('jos')).toBe(89);
+        expect(hashTable.set('x', {
+            firstName: 'joshuva',
+            lastName: 'George',
+            age: 29
+        })).toEqual({
+            success: true,
+            index: hashTable.convertHashCodeToIndex('x')
+        });
+        expect(hashTable.get('x')).toStrictEqual({
+            firstName: 'joshuva',
+            lastName: 'George',
+            age: 29
+        });
+        expect(hashTable.getValues()).toEqual([
+            89,
+            {
+                firstName: 'joshuva',
+                lastName: 'George',
+                age: 29
+            }
+        ])
     });
 
 });

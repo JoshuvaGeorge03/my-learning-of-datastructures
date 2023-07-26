@@ -20,6 +20,11 @@ export class HashTable {
     return this.allowedKeyTypes().includes(getTypeOf(key));
   }
 
+  checkWhetherKeyExist(key) {
+    const isKeyExist = this.keys[key] ?? false;
+    return isKeyExist === false ? false : true;
+  }
+
   notSupportedTypeError() {
     return "not an supported type of keys, please use string as keys";
   }
@@ -53,8 +58,7 @@ export class HashTable {
     if (!this.checkWhetherTheKeyIsOfSupportedType(key)) {
       throw this.notSupportedTypeError();
     }
-
-    if (!this.keys[key]) {
+    if (!this.checkWhetherKeyExist(key)) {
       throw this.noKeyExistError();
     }
     const index = this.convertHashCodeToIndex(key);
@@ -78,7 +82,6 @@ export class HashTable {
 
     const hashCode = this.convertHashCodeToIndex(key);
     this.keys[key] = hashCode;
-
     const hashTableLinkedList = this.hashTable[hashCode];
     if (hashTableLinkedList) {
       const isCurrentKeyAlreadyPresentLinkedList = hashTableLinkedList.find(
@@ -116,7 +119,7 @@ export class HashTable {
       throw this.notSupportedTypeError();
     }
 
-    if(!this.keys[key]) {
+    if(!this.checkWhetherKeyExist(key)) {
       throw this.noKeyExistError();
     }
     

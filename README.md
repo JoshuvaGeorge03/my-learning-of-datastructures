@@ -157,7 +157,7 @@ how removing or polling of binary heap work?
 In generally, with the heap, we always want to remove the root node(one with the highest priority).
 
 when we remove the root, we call it polling, and for removing the root, we don't have to search it index, because, we alreay know, it is at index 0, in our array representation.
-and when we do polling or removing, we will find the index of the element to remove, and swap it with last indexed element, and removed the last index element and checked whether the heap invariant is still satisfied, if not satisfied, we have to do bubbling down/shifting down untill heap invariant is satisfied. now compare parent node with the child node, and select the smallest value node and replace it with the parent node and continue it and if two child nodes are of same value, then always choos the left child node and swap it untill heap invariant is satisfied.
+and when we do polling or removing, we will find the index of the element to remove, and swap it with last indexed element, and removed the last index element and checked whether the heap invariant is still satisfied, if not satisfied, we have to do bubbling down/shifting down/sinking untill heap invariant is satisfied. now compare parent node with the child node, and select the smallest value node and replace it with the parent node and continue it and if two child nodes are of same value, then always choos the left child node and swap it untill heap invariant is satisfied.
 
 if we need to do removing of node with particular value, then we can initially find a index of element via linear search and then do the above process.
 
