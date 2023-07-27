@@ -57,7 +57,30 @@ describe('Hash Table lookup Test', () => {
                 lastName: 'George',
                 age: 29
             }
-        ])
+        ]);
+
+        expect(() => hashTable.get('joshuva')).toThrow(/key not assigned before/);
+
+        expect(() => hashTable.delete('joshuva')).toThrow(/key not assigned before/);
+
+        expect(hashTable.delete('jos')).toBe(89);
+
+        expect(hashTable.getValues()).toEqual([
+            {
+                firstName: 'joshuva',
+                lastName: 'George',
+                age: 29
+            }
+        ]);
+
+        expect(hashTable.delete('x')).toEqual({
+            firstName: 'joshuva',
+            lastName: 'George',
+            age: 29
+        });
+
+        expect(hashTable.getValues()).toEqual([]);
+        expect(hashTable.toString()).toBe('');
     });
 
 });
