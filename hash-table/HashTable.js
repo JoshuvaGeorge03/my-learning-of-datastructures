@@ -132,7 +132,7 @@ export class HashTable {
   }
 
   has(key) {
-    return Object.hasOwn(this.keys, key);
+    return Object.prototype.hasOwnProperty.call(this.keys, key);
   }
 
   getKeys() {
