@@ -163,6 +163,13 @@ if we need to do removing of node with particular value, then we can initially f
 
 we can also improve time complexity of the removing(due to linear search to find element index), by incorporating hash table, which is providing constant time for lookup and updating mapping of a keys(value of heap node) and values(index of the values preseent in heap, we can use set or tree support multiple values of the index)
 
+operations -> 
+1) find-max or find-min or peek -> find maximum or minimum item of the heap based on it's implemenations
+2) delete max or delete min or poll -> delete root node of the heap(max or min)
+3) insert -> add new elements to the heap(push or add)
+4) decrease or increase key -> updating the key within a max or min heap
+5) meld -> creating a new heap with all the original elements by combining two existing heap to for and deleting the original heap.
+
 ### Priority Queue 
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
 
