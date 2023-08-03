@@ -1,3 +1,4 @@
+import { convertToFalseOnlyIfValueIsNullOrUndefined } from '../utils/boolean';
 export default class BinaryHeap {
   constructor() {
     this.heapContainer = [];
@@ -35,6 +36,47 @@ export default class BinaryHeap {
     this.swap();
     const removedValue = this.heapContainer.pop();
     return removedValue;
+  }
+
+  add(value) {
+    if(this.isEmpty()) {
+      this.heapContainer.push(value);
+      return this;
+    }
+    this.heapContainer.push(value);
+    return this;
+  }
+
+  leftChildIndex(parentIndex) {
+    return 2 * parentIndex + 1;
+  }
+
+  rightChildIndex(parentIndex) {
+    return 2 * parentIndex + 2;
+  }
+
+  getParentIndexFromRightChildIndex(index) {
+    return (index - 2) / 2;
+  }
+
+  getParentIndexFromLeftChildIndex(index) {
+    return (index - 1) / 2;
+  }
+
+  isRightChild(index) {
+    return index % 2 === 0 ? true : false;
+  }
+
+  isLeftChild(index) {
+    return !this.isRightChild(index);
+  }
+
+  hasParent(index) {
+    const isRightChild = this.isRightChild(index);
+    if(isRightChild) {
+      return convertToFalseOnlyIfValueIsNullOrUndefined(this.heapContainer[this.getParentIndexFromRightChildIndex(index)]);
+    }
+    return convertToFalseOnlyIfValueIsNullOrUndefined(this.heapContainer[this.getParentIndexFromLeftChildIndex(index)]);
   }
 
   heapifyUp() {
