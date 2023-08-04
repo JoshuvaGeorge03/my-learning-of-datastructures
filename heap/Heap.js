@@ -35,6 +35,7 @@ export default class BinaryHeap {
     }
     this.swap();
     const removedValue = this.heapContainer.pop();
+    // need to bubble down to staisfies the heap invariant
     return removedValue;
   }
 
@@ -44,6 +45,7 @@ export default class BinaryHeap {
       return this;
     }
     this.heapContainer.push(value);
+    this.heapifyUp(this.heapContainer.length - 1);
     return this;
   }
 
@@ -71,6 +73,14 @@ export default class BinaryHeap {
     return !this.isRightChild(index);
   }
 
+  getParentIndexBasedOnLeftOrRightChildIndex(childIndex) {
+    const isRightChild = this.isRightChild(childIndex);
+    if(isRightChild) {
+      return this.getParentIndexFromRightChildIndex(childIndex);
+    }
+    return this.getParentIndexFromLeftChildIndex(childIndex);
+  }
+
   hasParent(index) {
     const isRightChild = this.isRightChild(index);
     if(isRightChild) {
@@ -79,11 +89,27 @@ export default class BinaryHeap {
     return convertToFalseOnlyIfValueIsNullOrUndefined(this.heapContainer[this.getParentIndexFromLeftChildIndex(index)]);
   }
 
-  heapifyUp() {
+  getParentValue(childIndex) {
+    if(this.hasParent(childIndex)) {
+      const index = this.getParentIndexBasedOnLeftOrRightChildIndex(childIndex);
+      return this.heapContainer[index];
+    }
+    return null;
+  }
 
+  heapifyUp(indexToStart) {
+    let currentIndex = indexToStart || this.heapContainer.length - 1;
+    while(this.hasParent(currentIndex) && !this.pairIsInCorrectOrder(this.heapContainer[currentIndex], this.getParentValue(currentIndex))) {
+      this.swap(currentIndex, this.getParentIndexBasedOnLeftOrRightChildIndex(currentIndex));
+      currentIndex = this.getParentIndexBasedOnLeftOrRightChildIndex(currentIndex);
+    }
   }
   
   heapifyDown() {
     
+  }
+
+  pairIsInCorrectOrder(childValue, parentValue) {
+    throw new Error('it should be implemented based on the min or max heap cases');
   }
 }
