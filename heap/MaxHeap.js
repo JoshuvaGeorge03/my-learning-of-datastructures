@@ -1,3 +1,7 @@
-export default class MaxHeap {
-    
+import BinaryHeap from "./Heap";
+
+export default class MaxHeap extends BinaryHeap {
+    pairIsInCorrectOrder(childValue, parentValue) {
+        return parentValue >= childValue;
+    }
 }

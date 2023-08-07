@@ -24,14 +24,18 @@ Ex: Take our car engine, how it running we don't know, we just start the car it 
 
 ### Measure Data Structure Performance (Computational Complexity Analysis)
 Basically, we will ask two questions, when comes to measure performance.
-+ How much time, My algorithm takes to finish
-+ How much space needed for my computation
++ How much time, My algorithm takes to finish? infinite time
++ How much space needed for my computation? all bytest of files on the internet.
+
+To standardize the ways to talk about, how much space/time our algorithm needs to finish, theoratical analysts, invented the Big O notation.
 
 we have few different way to say/indicate our algorithm performance under different circumstances.
 
 + Big Theta -> average time case scenario (usually combining worst case scenario and best case scenario)
 + Big Umega -> lower bound complexity scenario (best case)
 + Big O notation -> upper bound complexity of the worst case, To quanity performance as input size becomes so large.
+
+This all cases can be attributed for space too.
 
 ex: We are sorting un-order list of number and finding max number from that, and our max number being found in the beginning or middle is best case scenario, usually Big O notation, don't care about that kind of situation, it care about, what happens, if max number is at the end of the list. how much time will be taken if that's the case?  same concept applies for memory also, how much space this algorithm can take if input size is arbitaritly large. 
 
@@ -49,6 +53,8 @@ Quadric -> o(n2)
 cubic -> o(n2)
 exponential -> o(b power of n) where b > 1
 Factorial -> O(n!)
+
+actually, any mathematical expression combined with **n** can be valid Big(O) notation.
 
 **f(n) of algorithm**
 For ex: f(n) is function that describe the time taken to running the algorithm for the input size of n.

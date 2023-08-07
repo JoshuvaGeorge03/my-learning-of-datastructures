@@ -6,8 +6,11 @@ const dummyPredicate = (v) => false;
 
 const dummyArr = [];
 
+export const doNothingExceptReturningPassedArgument = parameterValue => parameterValue;
+
 module.exports = {
     defaultCallback,
     dummyPredicate,
-    dummyArr
+    doNothingExceptReturningPassedArgument,
+    dummyArr,
 };
