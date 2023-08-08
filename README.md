@@ -185,7 +185,7 @@ operations ->
 
  -> it contains, same set of operation as queue, but it polls high priority elements from the queue and add to the queue based on priority.
 
- -> how priority queue know, which element to remove, does it reset all element each time polling. nope, it uses heap Data strucuture to do this.
+ -> how priority queue know, which element to remove, does it reset all element each time polling. nope, it uses heap Data strucuture to do this. we need to use Data structure to do this.
 
 Converting Min PQ to Max PQ and vice versa
  To turn Min PQ to Max PQ, why we do that? because, most times, we will have min PQ or max PQ, so, we should find a way to convert it into other PQ.
@@ -195,3 +195,5 @@ Converting Min PQ to Max PQ and vice versa
  As we already said, priroity queue is Abstract Data Type(ADT), so it can be implemented in any DS(Data Structure), but we are using heap to implement it. because, it obtains us best time complexity. but we can implement the same with unordered list also, but in that case, time complexity becomes harder.
 
  so only sometimes, prirority queues are often called, heaps. but that's not technically correct.
+
+ using a hash table or any optimization requires time/space tradeoff, means it will require linear space and additional overhead to pull this off.

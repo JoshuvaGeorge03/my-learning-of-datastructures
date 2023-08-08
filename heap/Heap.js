@@ -13,7 +13,7 @@ export default class BinaryHeap {
   }
 
   isEmpty() {
-    return Boolean(this.getSize());
+    return !Boolean(this.getSize());
   }
 
   peek() {
