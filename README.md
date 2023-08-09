@@ -192,7 +192,7 @@ Converting Min PQ to Max PQ and vice versa
 
  To do that, we can abuse the fact, every elements in priority queue is comparable data, so they must implement a some comparable interface, which we can simply negate to attain alternate version of PQ by doing this when adding and polling.
 
- As we already said, priroity queue is Abstract Data Type(ADT), so it can be implemented in any DS(Data Structure), but we are using heap to implement it. because, it obtains us best time complexity. but we can implement the same with unordered list also, but in that case, time complexity becomes harder.
+ As we already said, priroity queue is Abstract Data Type(ADT), which only defines behaviour of DS, so it can be implemented in any DS(Data Structure), but we are using heap to implement it. because, it obtains us best time complexity. but we can implement the same with unordered list also, but in that case, time complexity becomes harder.
 
  so only sometimes, prirority queues are often called, heaps. but that's not technically correct.
 
