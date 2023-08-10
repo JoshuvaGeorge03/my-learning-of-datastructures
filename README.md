@@ -167,7 +167,7 @@ and when we do polling or removing, we will find the index of the element to rem
 
 if we need to do removing of node with particular value, then we can initially find a index of element via linear search and then do the above process.
 
-we can also improve time complexity of the removing(due to linear search to find element index), by incorporating hash table, which is providing constant time for lookup and updating mapping of a keys(value of heap node) and values(index of the values preseent in heap, we can use set or tree support multiple values of the index)
+we can also improve time complexity of the removing(due to linear search to find element index), by incorporating hash table, which is providing constant time for lookup and updating mapping of a keys(value of heap node) and values(index of the values preseent in heap, we can use set or tree set to support multiple values of the index)
 
 operations -> 
 1) find-max or find-min or peek -> find maximum or minimum item of the heap based on it's implemenations

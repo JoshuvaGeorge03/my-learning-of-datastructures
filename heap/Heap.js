@@ -8,6 +8,10 @@ export default class BinaryHeap {
     this.extractValueFromHeap = extractValueFromHeap;
   }
 
+  getValue(index) {
+    return this.heapContainer[index];
+  }
+
   getSize() {
     return this.heapContainer.length;
   }
@@ -24,11 +28,11 @@ export default class BinaryHeap {
     return this.extractValueFromHeap(this.heapContainer[0]);
   }
 
-  leftChildIndex(parentIndex) {
+  getLeftChildIndex(parentIndex) {
     return 2 * parentIndex + 1;
   }
 
-  rightChildIndex(parentIndex) {
+  getRightChildIndex(parentIndex) {
     return 2 * parentIndex + 2;
   }
 
@@ -45,7 +49,27 @@ export default class BinaryHeap {
   }
 
   isLeftChild(index) {
-    return !this.isRightChild(index);
+    return convertToFalseOnlyIfValueIsNullOrUndefined(this.isRightChild(index));
+  }
+
+  isLeftChildExist(parentIndex) {
+    return convertToFalseOnlyIfValueIsNullOrUndefined(
+      this.getLeftChildIndex(parentIndex)
+    );
+  }
+
+  isRightChildExist(parentIndex) {
+    return convertToFalseOnlyIfValueIsNullOrUndefined(
+      this.getRightChildIndex(parentIndex)
+    );
+  }
+
+  getLastIndex() {
+    return this.heapContainer.length - 1;
+  }
+
+  getStartIndex() {
+    return 0;
   }
 
   getParentIndexBasedOnLeftOrRightChildIndex(childIndex) {
@@ -89,9 +113,10 @@ export default class BinaryHeap {
     if (this.heapContainer.length === 1) {
       return this.heapContainer.pop();
     }
-    this.swap();
+    this.swap(0, this.getLastIndex());
     const removedValue = this.heapContainer.pop();
     // need to bubble down to staisfies the heap invariant
+    this.heapifyDown(this.getStartIndex());
     return removedValue;
   }
 
@@ -125,6 +150,41 @@ export default class BinaryHeap {
 
   heapifyDown(indexToStart) {
     let currentIndex = indexToStart;
+    let rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
+    let leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
+    while (
+      (this.isLeftChildExist(currentIndex) ||
+        this.isRightChildExist(currentIndex)) &&
+      (!this.pairIsInCorrectOrder(
+        leftChildValue,
+        this.getValue(currentIndex)
+      ) ||
+        !this.pairIsInCorrectOrder(
+          rightChildValue,
+          this.getValue(currentIndex)
+        ))
+    ) {
+      const isBothLeftAndRightChildAreSame = rightChildValue === leftChildValue;
+      if (isBothLeftAndRightChildAreSame) {
+        this.swap(currentIndex, this.getLeftChildIndex(currentIndex));
+        currentIndex = this.getLeftChildIndex(currentIndex);
+        rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
+        leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
+        continue;
+      }
+      const isLeftChildValueIsSmaller = leftChildValue < rightChildValue;
+      if (isLeftChildValueIsSmaller) {
+        this.swap(currentIndex, this.getLeftChildIndex(currentIndex));
+        currentIndex = this.getLeftChildIndex(currentIndex);
+        rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
+        leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
+      } else {
+        this.swap(currentIndex, this.getRightChildIndex(currentIndex));
+        currentIndex = this.getRightChildIndex(currentIndex);
+        rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
+        leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
+      }
+    }
   }
 
   pairIsInCorrectOrder(childValue, parentValue) {
