@@ -130,6 +130,25 @@ export default class BinaryHeap {
     return this;
   }
 
+  clear() {
+    while (this.heapContainer.length) {
+      this.heapContainer.pop();
+    }
+    return this.heapContainer.length;
+  }
+
+  contains(value) {
+    return this.heapContainer.find(
+      (heapValue) => this.extractValueFromHeap(heapValue) === value
+    );
+  }
+
+  find(cb) {
+    return this.heapContainer.some((heapValue) =>
+      cb(this.extractValueFromHeap(heapValue))
+    );
+  }
+
   heapifyUp(indexToStart) {
     let currentIndex = indexToStart || this.heapContainer.length - 1;
     while (
@@ -178,12 +197,12 @@ export default class BinaryHeap {
         currentIndex = this.getLeftChildIndex(currentIndex);
         rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
         leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
-      } else {
-        this.swap(currentIndex, this.getRightChildIndex(currentIndex));
-        currentIndex = this.getRightChildIndex(currentIndex);
-        rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
-        leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
+        continue;
       }
+      this.swap(currentIndex, this.getRightChildIndex(currentIndex));
+      currentIndex = this.getRightChildIndex(currentIndex);
+      rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
+      leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
     }
   }
 
