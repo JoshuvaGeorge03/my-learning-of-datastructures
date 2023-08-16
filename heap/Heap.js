@@ -158,6 +158,7 @@ export default class BinaryHeap {
         this.extractValueFromHeap(this.getParentValue(currentIndex))
       )
     ) {
+      console.log('current index', currentIndex);
       this.swap(
         currentIndex,
         this.getParentIndexBasedOnLeftOrRightChildIndex(currentIndex)
@@ -204,6 +205,14 @@ export default class BinaryHeap {
       rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
       leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
     }
+  }
+
+  toArray(extractValueFn = doNothingExceptReturningPassedArgument) {
+    return this.heapContainer.map(extractValueFn);
+  }
+
+  toString() {
+    return this.toArray().toString();
   }
 
   pairIsInCorrectOrder(childValue, parentValue) {
