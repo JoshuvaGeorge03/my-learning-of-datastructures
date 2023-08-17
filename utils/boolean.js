@@ -2,9 +2,10 @@ import { getTypeOf } from './typechecker';
 
 export function convertToFalseOnlyIfValueIsNullOrUndefined(value) {
     const falsyObject = {
-        'null': true,
-        'undefined': true
+        'null': false,
+        'undefined': false
     };
     const typeOfValue = getTypeOf(value);
-    return Boolean(falsyObject[typeOfValue]);
+    return falsyObject[typeOfValue] === false ? false : true;
+    
 }

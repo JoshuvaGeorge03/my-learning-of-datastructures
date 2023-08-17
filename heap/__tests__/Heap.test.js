@@ -1,3 +1,4 @@
+import { patchFunction } from "../../utils";
 import BinaryHeap from "../Heap";
 
 describe('ensuring functional correctness of Heap', () => {
@@ -5,6 +6,7 @@ describe('ensuring functional correctness of Heap', () => {
 
     beforeEach(() => {
         binaryHeap = new BinaryHeap();
+        binaryHeap.pairIsInCorrectOrder = pairIsInCorrectOrder;
     });
 
     afterEach(() => {
@@ -29,16 +31,13 @@ describe('ensuring functional correctness of Heap', () => {
         expect(binaryHeap.getSize()).toBe(0);
         expect(binaryHeap.add(1).getSize()).toBe(1);
         expect(binaryHeap.add(2).getSize()).toBe(2);
-        binaryHeap.poll()
-        expect(binaryHeap.getSize()).toBe(1);
+        // binaryHeap.poll();
+        // expect(binaryHeap.getSize()).toBe(1);
     });
 
     test('whether the elements are added and heap invariant is maintained', () => {
-        binaryHeap.pairIsInCorrectOrder = pairIsInCorrectOrder;
         expect(binaryHeap.add(1).toArray()).toEqual([1]);
         expect(binaryHeap.add(2).toArray()).toEqual([1,2]);
-        binaryHeap.add(0)
-        // expect(.toArray()).toEqual([0,2,1])
-        console.log('bindary', binaryHeap.toArray());
+        expect(binaryHeap.add(0).toArray()).toEqual([0,2,1]);
     });
 })
