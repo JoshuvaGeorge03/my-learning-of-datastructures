@@ -54,13 +54,13 @@ export default class BinaryHeap {
 
   isLeftChildExist(parentIndex) {
     return convertToFalseOnlyIfValueIsNullOrUndefined(
-      this.getLeftChildIndex(parentIndex)
+      this.heapContainer[this.getLeftChildIndex(parentIndex)]
     );
   }
 
   isRightChildExist(parentIndex) {
     return convertToFalseOnlyIfValueIsNullOrUndefined(
-      this.getRightChildIndex(parentIndex)
+      this.heapContainer[this.getRightChildIndex(parentIndex)]
     );
   }
 
@@ -110,7 +110,7 @@ export default class BinaryHeap {
     if (this.isEmpty()) {
       return null;
     }
-    if (this.heapContainer.length === 1) {
+    if (this.heapContainer.length === 1 || this.heapContainer.length === 2) {
       return this.heapContainer.pop();
     }
     this.swap(0, this.getLastIndex());

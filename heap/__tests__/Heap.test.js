@@ -1,4 +1,5 @@
 import { patchFunction } from "../../utils";
+import { convertToFalseOnlyIfValueIsNullOrUndefined } from "../../utils/boolean";
 import BinaryHeap from "../Heap";
 
 describe('ensuring functional correctness of Heap', () => {
@@ -14,7 +15,7 @@ describe('ensuring functional correctness of Heap', () => {
     });
 
     function pairIsInCorrectOrder (childValue, parentValue) {
-        return parentValue <= childValue; // min heap impl
+        return (convertToFalseOnlyIfValueIsNullOrUndefined(parentValue) && convertToFalseOnlyIfValueIsNullOrUndefined(childValue)) ? parentValue <= childValue : true; // min heap impl
     }
 
     test('whether the heap is empty or not correctly', () => {
@@ -29,10 +30,12 @@ describe('ensuring functional correctness of Heap', () => {
 
     test('whether the size of the heap returns correctly', () => {
         expect(binaryHeap.getSize()).toBe(0);
-        expect(binaryHeap.add(1).getSize()).toBe(1);
-        expect(binaryHeap.add(2).getSize()).toBe(2);
-        // binaryHeap.poll();
-        // expect(binaryHeap.getSize()).toBe(1);
+        binaryHeap.add(5).add(8).add(393).add(373).add(333).add(9);
+        expect(binaryHeap.add(1).getSize()).toBe(7);
+        expect(binaryHeap.add(2).getSize()).toBe(8);
+        expect(binaryHeap.add(0).getSize()).toBe(9);
+        binaryHeap.poll();
+        expect(binaryHeap.getSize()).toBe(8);
     });
 
     test('whether the elements are added and heap invariant is maintained', () => {
