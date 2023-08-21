@@ -42,5 +42,21 @@ describe('ensuring functional correctness of Heap', () => {
         expect(binaryHeap.add(1).toArray()).toEqual([1]);
         expect(binaryHeap.add(2).toArray()).toEqual([1,2]);
         expect(binaryHeap.add(0).toArray()).toEqual([0,2,1]);
+        binaryHeap.add(8).add(28).add(-2).add(9).add(8).add(109);
+        expect(binaryHeap.toArray()).toEqual([-2,2,0,8,28,1,9,8,109]);
+    });
+
+    test('whether the elements are polled and heap invariant is maintained', () => {
+        expect(binaryHeap.poll()).toBe(null);
+        expect(binaryHeap.toArray()).toEqual([]);
+        binaryHeap.add(1);
+        expect(binaryHeap.poll()).toBe(1);
+        expect(binaryHeap.toArray()).toEqual([]);
+        binaryHeap.add(1).add(2);
+        expect(binaryHeap.poll()).toBe(2);
+        expect(binaryHeap.toArray()).toEqual([1]);
+        binaryHeap.add(2).add(0).add(8).add(28).add(-2).add(9).add(8).add(109);
+        expect(binaryHeap.poll()).toBe(-2);
+        expect(binaryHeap.toArray()).toEqual([0,2,1,8,28,109,9,8]);
     });
 })
