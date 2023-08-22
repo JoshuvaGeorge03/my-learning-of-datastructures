@@ -59,4 +59,27 @@ describe('ensuring functional correctness of Heap', () => {
         expect(binaryHeap.poll()).toBe(-2);
         expect(binaryHeap.toArray()).toEqual([0,2,1,8,28,109,9,8]);
     });
+
+    test('wether the heap is cleared correctly', () => {
+        expect(binaryHeap.clear()).toBe(0);
+        expect(binaryHeap.add(2).add(0).add(8).add(28).add(-2).add(9).add(8).add(109).getSize()).toBe(8);
+        expect(binaryHeap.toArray()).toEqual([-2,0,8, 28,2,9,8,109]);
+        expect(binaryHeap.clear()).toBe(0);
+    });
+
+    test('wehter we can find specific value present or not', () => {
+        expect(binaryHeap.contains(5)).toBe(false);
+        expect(binaryHeap.find((v) => v === 5)).toBe(false);
+        binaryHeap.add(2).add(0).add(8).add(28).add(-2).add(9).add(8).add(109);
+        expect(binaryHeap.contains(393)).toBe(false);
+        expect(binaryHeap.contains(8)).toBe(true);
+        expect(binaryHeap.contains(-2)).toBe(true);
+        expect(binaryHeap.poll()).toBe(-2);
+        expect(binaryHeap.contains(-2)).toBe(false);
+        expect(binaryHeap.find((v) => v === 393)).toBe(false);
+        expect(binaryHeap.find(v => v === 109)).toBe(true);
+        expect(binaryHeap.find(v => v === 0)).toBe(true);
+        binaryHeap.poll();
+        expect(binaryHeap.find(v => v === 0)).toBe(false);
+    });
 })

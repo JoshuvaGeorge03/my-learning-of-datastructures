@@ -131,6 +131,7 @@ export default class BinaryHeap {
   }
 
   clear() {
+    if(this.isEmpty()) return 0
     while (this.heapContainer.length) {
       this.heapContainer.pop();
     }
@@ -138,9 +139,9 @@ export default class BinaryHeap {
   }
 
   contains(value) {
-    return this.heapContainer.find(
+    return Boolean(this.heapContainer.some(
       (heapValue) => this.extractValueFromHeap(heapValue) === value
-    );
+    ));
   }
 
   find(cb) {
