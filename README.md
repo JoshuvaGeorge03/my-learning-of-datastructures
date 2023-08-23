@@ -131,6 +131,8 @@ Heap is specialized tree based data structure which satisfies the heap property.
  **Binary Heap**
 It is a Binary Tree which follows heap invariant, where every node in the tree has two children.
 
+**Tree also some kind of graph with constraints**
+
 Import part of the implementation in binary tree is complete binary tree property, which indicates the tree in which every level is completely filled as far left as possible. why this is important is? it gives us the insertion point, no matter how the tree looks like, we always start inserting values from the inserting point and check whether heap property followed and do insertion.
 
 insertion point is always bottom row of heap and left most part if it is empty, otherwise new row is formed.

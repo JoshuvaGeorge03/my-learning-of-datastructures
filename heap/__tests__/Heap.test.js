@@ -82,4 +82,10 @@ describe('ensuring functional correctness of Heap', () => {
         binaryHeap.poll();
         expect(binaryHeap.find(v => v === 0)).toBe(false);
     });
+
+    test('whether the heap can be converted to string in a correct way', () => {
+        expect(binaryHeap.toString()).toBe('');
+        binaryHeap.add(2).add(0).add(8).add(28).add(-2).add(9).add(8).add(109);
+        expect(binaryHeap.toString()).toBe('-2,0,8,28,2,9,8,109');
+    });
 })
