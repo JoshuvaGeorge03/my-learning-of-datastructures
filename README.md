@@ -199,3 +199,36 @@ Converting Min PQ to Max PQ and vice versa
  so only sometimes, prirority queues are often called, heaps. but that's not technically correct.
 
  using a hash table or any optimization requires time/space tradeoff, means it will require linear space and additional overhead to pull this off.
+
+
+ ### Hash Table
+
+ Hash Table is provides mapping to keys to values using hash function. It is abstract associative array data type implementation.
+
+ Hash Table keys should be unique, but not values.
+
+ Hash table keys should be hashable, it can support any type of data that can be hashable.
+
+ Hash function basically means converting keys to a whole number and reduce it to a given range.
+
+ Properties of Hash Function
+
+ - Hash function should satisfy this, H(x) == H(y), then they might be equal, it indicates collision cases, we need to check further to know, whether it is really equal, but if Hash function say H(x) != H(y) then they are not at all equal.
+
+ ex) file comparison, rather than comparing two big files in byte - byte identical manner, we can compare hashes of those files to determine, is it not equal?
+
+ - Hash function should be deterministic. kind of like pure function
+ex) H(x) produces Y, then it should always produce y for key x.
+
+- Hash function should be uniform, so, hash function can reduce number of collision. A hash collision occurs, when hash function produces same value for two or more keys. so, we can utilize every table index.
+
+
+In hash table, we can do constant time insertion, lookup, deletion. but this attribute only achieved, if we have a uniform hash function. because, using hash functon, we indexing a value into Data structure.
+
+But, even Sometimes, collision occurs, How to handle it?
+
+we can use hash collision techniques like, separate chaining, open addressing.
+
+Separate Chaining: It deals with collision by maintaining separate DS, to hold all the values which hashed to a particular value.
+
+Open Addressing: Basically, everything will be within same DS, but how it deals with it is, basically, probing and finding the great offset to put this value.
