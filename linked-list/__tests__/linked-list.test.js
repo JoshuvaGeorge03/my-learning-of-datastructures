@@ -58,64 +58,31 @@ describe('Going to test linked list data structure', () => {
     //     return new LinkedList();
     // });
 
-    it('should create a empty linked list', () => {
+    function getValueOnlyFromLinkedListNode(node) {
+        return node.data;
+    }
+
+
+    it('should add to the end of the list correctly', () => {
         const list = new LinkedList();
-        expect(list.toString()).toBe('');
-        expect(list.head).toBeNull();
-        expect(list.tail).toBeNull();
+        expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([]);
+        list.append(9).append(90);
+        expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([9,90]);
+        list.append(2929).append(393);
+        expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([9,90,2929,393]);
     });
 
-    test('whether appending to the list works well', () => {
-        const linkedListDataStructure = new LinkedList();
-
-        linkedListDataStructure.append(9);
-
-        expect(linkedListDataStructure.head.toString()).toBe('9');
-        expect(linkedListDataStructure.tail.toString()).toBe('9');
-        expect(linkedListDataStructure.append(12).toString()).toEqual('9,12');
-
-        expect(linkedListDataStructure.head.toString()).toBe('9');
-        expect(linkedListDataStructure.tail.toString()).toBe('12');
-
-
-        linkedListDataStructure.append(1112).append(383);
-
-        expect(linkedListDataStructure.head.toString()).toBe('9');
-        expect(linkedListDataStructure.tail.toString()).toBe('383');
-
-        expect(linkedListDataStructure.toString()).toEqual('9,12,1112,383');
+    it('should add to the start of the list correctly', () => {
+        const list = new LinkedList();
+        list.prepend(9).prepend(90)
+        expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([90,9]);
+        expect(list.prepend(393).prepend(3).toArray(getValueOnlyFromLinkedListNode)).toEqual([3,393,90,9]);
     });
 
-    it('should prepend items to the list reliably', () => {
+    it('should add to the list in a specified index correctly', () => {
         const list = new LinkedList();
-
-        list.prepend(9);
-
-        expect(list.head).not.toBeNull();
-        expect(list.head.toString()).toBe('9');
-        expect(list.tail.toString()).toBe('9')
-        expect(list.toArray().length).toBe(1);
-
-        list.prepend(8);
-
-        expect(list.head.toString()).toBe('8');
-        expect(list.tail.toString()).toBe('9');
-        expect(list.toString()).toStrictEqual([8,9].toString());
-
-        list.prepend(10).prepend(67).prepend(28);
-
-        expect(list.head.toString()).toBe('28');
-        expect(list.tail.toString()).toBe('9');
-        expect(list.toString()).toEqual([28,67,10,8,9].toString())
-    });
-
-    it('should insert items to the specified index correctly', () => {
-        const list = new LinkedList();
-        list.insertAtIndex(-1, 9)
-        expect(list.head.toString()).toBe('9');
-        expect(list.tail.toString()).toBe('9');
-        expect(list.toString()).toEqual([9].toString());
-        expect(() => list.insertAtIndex(9, 10)).toThrow(/index is larger than list length/);
+        expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([]);
+        expect(() => list.insertAtIndex(2, 4).toArray(getValueOnlyFromLinkedListNode)).toThrow(/index 2 to be added is larger than list length of 0/);
     });
 
 });

@@ -1,6 +1,6 @@
 
 const utils = require('../utils/default-value-assignment.js');
-const { defaultCallback, dummyPredicate, dummyArr } = utils;
+const { dummyPredicate, dummyArr, doNothingExceptReturningPassedArgument } = utils;
 
 export class LinkedListNode {
     constructor(data, next = null) {
@@ -64,17 +64,21 @@ export class LinkedList {
                 currentIndex += 1;
             }
             if (currentNode) {
-                data.next = currentNode.next;
-                currentNode.next = data;
+                node.next = currentNode.next;
+                currentNode.next = node;
             } else {
-                throw new Error('index is larger than list length', index, this.toArray().length);
-                // if (this.tail) {
-                //     this.tail.next = node;
-                //     this.tail = node;
-                // } else {
-                //     this.head = node;
-                //     this.tail = node;
-                // }
+                if(this.toArray().length - 1 >= rawIndex) {
+                    if(this.tail) {
+                        this.tail.next = node;
+                        this.tail = node;
+                    } else {
+                        this.tail = node;
+                        this.head = node;
+                    }
+                } else {
+                    
+                    throw new Error(`index ${index} to be added is larger than list length of ${this.toArray().length}`);
+                }
             }
         }
         return this;
@@ -192,7 +196,7 @@ export class LinkedList {
         
     }
 
-    traverse(callback = defaultCallback) {
+    traverse(callback = doNothingExceptReturningPassedArgument) {
         let currentNode = this.head;
         let index = 0
         while (currentNode) {
@@ -203,12 +207,12 @@ export class LinkedList {
         return this;
     }
 
-    toArray() {
+    toArray(mapFunc = doNothingExceptReturningPassedArgument) {
 
         const linkedListNodeArr = []
         
         function collectNode(index, currentNode) {
-            linkedListNodeArr.push(currentNode);
+            linkedListNodeArr.push(mapFunc(currentNode));
         }
 
         this.traverse(collectNode);
