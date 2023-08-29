@@ -232,3 +232,14 @@ we can use hash collision techniques like, separate chaining, open addressing.
 Separate Chaining: It deals with collision by maintaining separate DS, to hold all the values which hashed to a particular value.
 
 Open Addressing: Basically, everything will be within same DS, but how it deals with it is, basically, probing and finding the great offset to put this value.
+
+**Separate Chaining**
+As stated, one of many has collision(two keys has to same value) resolution technique.
+
+How it handles it is, maintaining a separate DS, to hold all different values which hashed to same value by hash function.
+
+we can use any DS to handle this different value storage, but most common DS is linked list. and we can use binary tree, self balancing tree, but this DS are memory intensive and complext to implement.
+
+1) we are managing hash collision, but what about the case, where our HashTable(HT) is so full, and have long list of separate chains, in this scenario, how to maintain, constant time lookup O(1).
+
+Once the HT becomes so full, we need to create HT with a large capacity, and rehash every value from old HT and disperse threm throught the new HT.

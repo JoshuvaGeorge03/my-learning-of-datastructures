@@ -1,6 +1,7 @@
 
 const utils = require('../utils/default-value-assignment.js');
 const { dummyPredicate, dummyArr, doNothingExceptReturningPassedArgument } = utils;
+const { convertToFalseOnlyIfValueIsNullOrUndefined } = require('../utils/boolean.js');
 
 export class LinkedListNode {
     constructor(data, next = null) {
@@ -44,6 +45,9 @@ export class LinkedList {
     }
 
     insertAtIndex(index, data) {
+        if(!convertToFalseOnlyIfValueIsNullOrUndefined(index)) {
+            throw 'pass valid type for index';
+        }
         const rawIndex = index < 0 ? 0 : index;
         if (rawIndex === 0) {
             this.prepend(data);
