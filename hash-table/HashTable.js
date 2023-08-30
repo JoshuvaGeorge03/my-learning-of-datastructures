@@ -67,7 +67,7 @@ export class HashTable {
     const listNodeWhichContainsValueForTheSpecifiedKey =
       hashTableLinkedList.find((index, node) => node.data.key === key);
 
-    return listNodeWhichContainsValueForTheSpecifiedKey.currentNode.data.value;
+    return listNodeWhichContainsValueForTheSpecifiedKey.node.data.value;
   }
 
   set(key, value) {
@@ -87,8 +87,8 @@ export class HashTable {
       const isCurrentKeyAlreadyPresentLinkedList = hashTableLinkedList.find(
         (index, node) => node.data?.key === key
       );
-      if (isCurrentKeyAlreadyPresentLinkedList?.currentNode) {
-        isCurrentKeyAlreadyPresentLinkedList.currentNode.data = {
+      if (isCurrentKeyAlreadyPresentLinkedList?.node) {
+        isCurrentKeyAlreadyPresentLinkedList.node.data = {
           key,
           value,
         };
@@ -127,8 +127,8 @@ export class HashTable {
 
     const hashCode = this.convertHashCodeToIndex(key);
     const linkedListNode = this.hashTable[hashCode].find((index, node) => node.data.key === key);
-    this.hashTable[hashCode].deleteWithIndex(linkedListNode.currentIndex);
-    return linkedListNode.currentNode.data.value;
+    this.hashTable[hashCode].deleteWithIndex(linkedListNode.index);
+    return linkedListNode.node.data.value;
   }
 
   has(key) {

@@ -110,5 +110,9 @@ describe("Going to test linked list data structure", () => {
   it('should find item from the list correctly', () => {
     const list = new LinkedList();
     expect(list.searchBasedOnIndex(0)).toBe(null);
+    expect(list.searchBasedOnIndex(9)).toBe(null);
+    expect(list.searchBasedOnValue(9)).toBe(null);
+    expect(list.searchBasedOnValue(19)).toBe(null);
+    expect(list.find(v => v === 9)).toBe(null);
   });
 });
