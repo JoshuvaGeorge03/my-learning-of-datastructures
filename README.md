@@ -243,3 +243,5 @@ we can use any DS to handle this different value storage, but most common DS is 
 1) we are managing hash collision, but what about the case, where our HashTable(HT) is so full, and have long list of separate chains, in this scenario, how to maintain, constant time lookup O(1).
 
 Once the HT becomes so full, we need to create HT with a large capacity, and rehash every value from old HT and disperse threm throught the new HT.
+
+P.S: Always keep in mind tradeoff for caching, if caching helps with reducing computation time with minimal complexity, then go for cache.

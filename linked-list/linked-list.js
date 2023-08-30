@@ -99,13 +99,15 @@ export class LinkedList {
         }
         if (currentNode) {
             return currentNode.data;
-        } else {
-            if (this.tail) {
-                return this.tail.data;
-            } else {
-                return null;
-            }
-        }
+        } 
+        // else {
+        //     if (this.tail) {
+        //         return this.tail.data;
+        //     } else {
+        //         return null;
+        //     }
+        // }
+        return null;
     }
 
     searchBasedOnValue(data) {
