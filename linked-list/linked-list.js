@@ -102,7 +102,7 @@ export class LinkedList {
       current += 1;
     }
     if (currentNode) {
-      return { node: currentNode, data: currentNode.data, index: currentNode.index };
+      return { node: currentNode, data: currentNode.data, index: index };
     }
     // else {
     //     if (this.tail) {

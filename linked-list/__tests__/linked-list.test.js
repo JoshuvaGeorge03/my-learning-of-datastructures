@@ -101,18 +101,44 @@ describe("Going to test linked list data structure", () => {
       list.insertAtIndex(3, 78).toArray(getValueOnlyFromLinkedListNode)
     ).toEqual([8, 90, 9, 78, 4, 8, 7]);
     expect(
-        list.insertAtIndex(7, 68).toArray(getValueOnlyFromLinkedListNode)
+      list.insertAtIndex(7, 68).toArray(getValueOnlyFromLinkedListNode)
     ).toEqual([8, 90, 9, 78, 4, 8, 7, 68]);
-    expect(() => list.insertAtIndex(9,90)).toThrow(/index 9 to be added is larger than list length of 8/);
-    expect(() => list.insertAtIndex()).toThrow('pass valid type for index');
+    expect(() => list.insertAtIndex(9, 90)).toThrow(
+      /index 9 to be added is larger than list length of 8/
+    );
+    expect(() => list.insertAtIndex()).toThrow("pass valid type for index");
   });
 
-  it('should find item from the list correctly', () => {
+  it("should find item from the list correctly", () => {
     const list = new LinkedList();
     expect(list.searchBasedOnIndex(0)).toBe(null);
     expect(list.searchBasedOnIndex(9)).toBe(null);
     expect(list.searchBasedOnValue(9)).toBe(null);
     expect(list.searchBasedOnValue(19)).toBe(null);
-    expect(list.find(v => v === 9)).toBe(null);
+    expect(list.find((v) => v === 9)).toBe(null);
+    list
+      .prepend(9)
+      .append(83)
+      .insertAtIndex(1, 282)
+      .append(39)
+      .prepend(383)
+      .insertAtIndex(4, 283)
+      .append(38)
+      .prepend(37);
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      37, 383, 9, 282, 83, 283, 39, 38,
+    ]);
+    const returnedValue = {
+      node: expect.any(Object),
+      index: expect.any(Number),
+      data: expect.anything()
+    };
+    expect(list.searchBasedOnIndex(7).data).toBe(38);
+    expect(list.searchBasedOnIndex(3).data).toBe(282);
+    expect(list.searchBasedOnIndex(4)).toMatchObject(returnedValue);
+    expect(list.searchBasedOnIndex(8)).toBe(null);
+    expect(list.searchBasedOnValue(363)).toBe(null);
+    expect(list.searchBasedOnValue(383).index).toBe(1);
+    expect(list.searchBasedOnValue(38).index).toBe(7);
   });
 });
