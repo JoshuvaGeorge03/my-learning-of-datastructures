@@ -1,48 +1,53 @@
 # my-learning-of-datastructures
 
 ## Data Structure
+
 This is about organizing data, so that, we can access and modify or query it later more efficiently and easily. or we can say, it means collection of data elements and relationship among them and operation or function that we can perform on them.
 
 ### Why Data Structures?
+
 - Clean and understandable code
 - fast and efficient algorithm can be obtainable with good data structures.
 - organize and manage data
 
-### Abstract Data Structure or Abstract Data Type 
+### Abstract Data Structure or Abstract Data Type
+
 Abstract Data Type means, it defines the interface the data strcture should adhere to without any concrete implemenation details(can be said like, it don't specify how it should be implemented or in any programming lang);
 
 Ex: Take our car engine, how it running we don't know, we just start the car it is working. In the same way, interface telling us, how data should be structured and what operation we can perform on those data and how it should behave, like, different engines, can work with different modes, one can work with diesel and other work with current and other work with gas, In the same way, implementing those interface can be known as data structures. The implemenation details can be vary, but final output will be adhered to the interface.
 
 ### Types of Abstarct Data Type
 
-| Abstract Data Type(ADT) | Implementation (DS) |
-| --- | --- |
-| List | Dynamic array, linked list |
-| Queue | Linked list based queue, Array based queue, stack based Queue |
-| Map | Tree Map, Hash Map/ Hash Table |
-
+| Abstract Data Type(ADT) | Implementation (DS)                                           |
+| ----------------------- | ------------------------------------------------------------- |
+| List                    | Dynamic array, linked list                                    |
+| Queue                   | Linked list based queue, Array based queue, stack based Queue |
+| Map                     | Tree Map, Hash Map/ Hash Table                                |
 
 ### Measure Data Structure Performance (Computational Complexity Analysis)
+
 Basically, we will ask two questions, when comes to measure performance.
-+ How much time, My algorithm takes to finish? infinite time
-+ How much space needed for my computation? all bytest of files on the internet.
+
+- How much time, My algorithm takes to finish? infinite time
+- How much space needed for my computation? all bytest of files on the internet.
 
 To standardize the ways to talk about, how much space/time our algorithm needs to finish, theoratical analysts, invented the Big O notation.
 
 we have few different way to say/indicate our algorithm performance under different circumstances.
 
-+ Big Theta -> average time case scenario (usually combining worst case scenario and best case scenario)
-+ Big Umega -> lower bound complexity scenario (best case)
-+ Big O notation -> upper bound complexity of the worst case, To quanity performance as input size becomes so large.
+- Big Theta -> average time case scenario (usually combining worst case scenario and best case scenario)
+- Big Umega -> lower bound complexity scenario (best case)
+- Big O notation -> upper bound complexity of the worst case, To quanity performance as input size becomes so large.
 
 This all cases can be attributed for space too.
 
-ex: We are sorting un-order list of number and finding max number from that, and our max number being found in the beginning or middle is best case scenario, usually Big O notation, don't care about that kind of situation, it care about, what happens, if max number is at the end of the list. how much time will be taken if that's the case?  same concept applies for memory also, how much space this algorithm can take if input size is arbitaritly large. 
+ex: We are sorting un-order list of number and finding max number from that, and our max number being found in the beginning or middle is best case scenario, usually Big O notation, don't care about that kind of situation, it care about, what happens, if max number is at the end of the list. how much time will be taken if that's the case? same concept applies for memory also, how much space this algorithm can take if input size is arbitaritly large.
 
 ### Calculating Big(0)
+
 So, when calculating big O notation, we will avoid constants and multiple factors.
 
-n -> size of input we are going to execute with our algorithm... 
+n -> size of input we are going to execute with our algorithm...
 
 we will list below, common Big O notation of algorithm
 constant -> O(1)
@@ -58,10 +63,10 @@ actually, any mathematical expression combined with **n** can be valid Big(O) no
 
 **f(n) of algorithm**
 For ex: f(n) is function that describe the time taken to running the algorithm for the input size of n.
-f(n) = 7n + 3n**2 + 2n*\*3 + 9;
+f(n) = 7n + 3n\*_2 + 2n_\*3 + 9;
 
-For this function, O(n) will be 
-O(f(n)) = O(n**3) // because, n cube is biggest factor contributing to the time. so, O(n) is calculated based on that.
+For this function, O(n) will be
+O(f(n)) = O(n\*\*3) // because, n cube is biggest factor contributing to the time. so, O(n) is calculated based on that.
 
 To find out Big(0) complexity of the algorithm, find f(n) of the algorithm and remove constants and multiple factors and only consider worst case to derive Big(0) notation.
 
@@ -70,6 +75,7 @@ To find out Big(0) complexity of the algorithm, find f(n) of the algorithm and r
 ```
 when implementing data structure, always look out for memory leaks and concurrent modifications realted problem.
 ```
+
 ### Static Array And Dynamic Arrays:
 
 -> Fundamental Data structure, because using arrays and pointers, we can build up any data structure.
@@ -88,8 +94,8 @@ access -> o(1) search(what if elements did not present), deletion(same like inse
 
 -> doubly linked list is kind of same like linked list, which is sequential list of nodes, where each node contains data and pointer/reference to previous/next node.
 
-
 ### Stack
+
 -> It is a one ended linear data structure, which simulates a real world stack using two primary functions namely, push and pop.
 
 -> also called LIFO (last in fast out);
@@ -99,6 +105,7 @@ access -> o(1) search(what if elements did not present), deletion(same like inse
 ex: finding brackets and braces matching in a syntax. and tower of hanoi games. depth first traversal.
 
 ### Queue
+
 -> Queue is a linear data structure, which simulates a relad world queue using two function namely enqueue, dequeue.
 
 -> enqueue also called offering, adding to the back of the queue.
@@ -111,24 +118,24 @@ ex: finding brackets and braces matching in a syntax. and tower of hanoi games. 
 
 ex: web server serving web request can implement a queue to process req as it comes. breadth first traversal.
 
-
 ### Heap
 
 Heap is specialized tree based data structure which satisfies the heap property.
 
 -> Heap is tree based Data strucuture, which satisfies heap invariant (also called heap property), heap property indicates values of the parent node is always greater than or equal to value of all child nodes Or else value of parent node is lesser than or equal to all child nodes. so, due to this, we end up getting two heap.
 
- 1) Max heap -> parent node have greatest value than all child nodes (if p is parent node of c, than c is less than or equal to p)
- 2) Min heap -> parent node have lessest value than all child nodes. (if p is parent node of c, than c is greater than or equal to c)
+1.  Max heap -> parent node have greatest value than all child nodes (if p is parent node of c, than c is less than or equal to p)
+2.  Min heap -> parent node have lessest value than all child nodes. (if p is parent node of c, than c is greater than or equal to c)
 
- Binary heap indicates if every node has exactly two child, binomial heap means nodes have variable number of childs
+Binary heap indicates if every node has exactly two child, binomial heap means nodes have variable number of childs
 
- Note: all heaps must be trees, no cycle should be present.
+Note: all heaps must be trees, no cycle should be present.
 
- There are multiple types of heap, which are
- 1) Binary Heap, 2) Fibonacci heap 3) Binomial Heap 4) Pairing Heap 5) Leftist heap 6) Brodal Heap 7) Rank Pairing Heap 8)Strict Fibonacci Heap 9) 2-3 Heap.
+There are multiple types of heap, which are
 
- **Binary Heap**
+1.  Binary Heap, 2) Fibonacci heap 3) Binomial Heap 4) Pairing Heap 5) Leftist heap 6) Brodal Heap 7) Rank Pairing Heap 8)Strict Fibonacci Heap 9) 2-3 Heap.
+
+**Binary Heap**
 It is a Binary Tree which follows heap invariant, where every node in the tree has two children.
 
 **Tree also some kind of graph with constraints**
@@ -139,6 +146,7 @@ insertion point is always bottom row of heap and left most part if it is empty, 
 
 How to represent these heap, we can visually, see them as tree like structure, but for computer to understand, how we can represent these heap internally?
 Heap tree visual represenation vs heap tree internal code representation.
+
 ```
 
             9                    heap tree  ->  index tree                  0
@@ -149,9 +157,9 @@ Heap tree visual represenation vs heap tree internal code representation.
 
 ```
 
-index tree 0  1 2 3 4
+index tree 0 1 2 3 4
 
-heap value 9  8 7 5 6
+heap value 9 8 7 5 6
 
 we are using array to represent binary heaps, and due to this, we can always say insertion point is last item of the array and root node is initial index of the array. and we can also use object and pointers, but array is simple and so fast.
 
@@ -171,57 +179,57 @@ if we need to do removing of node with particular value, then we can initially f
 
 we can also improve time complexity of the removing(due to linear search to find element index), by incorporating hash table, which is providing constant time for lookup and updating mapping of a keys(value of heap node) and values(index of the values preseent in heap, we can use set or tree set to support multiple values of the index)
 
-operations -> 
-1) find-max or find-min or peek -> find maximum or minimum item of the heap based on it's implemenations
-2) delete max or delete min or poll -> delete root node of the heap(max or min)
-3) insert -> add new elements to the heap(push or add)
-4) decrease or increase key -> updating the key within a max or min heap
-5) meld -> creating a new heap with all the original elements by combining two existing heap to for and deleting the original heap.
+operations ->
 
-### Priority Queue 
+1. find-max or find-min or peek -> find maximum or minimum item of the heap based on it's implemenations
+2. delete max or delete min or poll -> delete root node of the heap(max or min)
+3. insert -> add new elements to the heap(push or add)
+4. decrease or increase key -> updating the key within a max or min heap
+5. meld -> creating a new heap with all the original elements by combining two existing heap to for and deleting the original heap.
+
+### Priority Queue
+
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
 
 -> it is kinda like normal queue, but each element in the queue has certain priority. and priority of the elements in the queue, determine the order in whihc elements are removed from the queue.
 
 -> One thing to keep remember is, priority queues only support data that are comparable, means the inserted data should be ordered in least to greatest or in greatest to least way. Why? because, then only, we can assign relative priority to this.
 
- -> it contains, same set of operation as queue, but it polls high priority elements from the queue and add to the queue based on priority.
+-> it contains, same set of operation as queue, but it polls high priority elements from the queue and add to the queue based on priority.
 
- -> how priority queue know, which element to remove, does it reset all element each time polling. nope, it uses heap Data strucuture to do this. we need to use Data structure to do this.
+-> how priority queue know, which element to remove, does it reset all element each time polling. nope, it uses heap Data strucuture to do this. we need to use Data structure to do this.
 
 Converting Min PQ to Max PQ and vice versa
- To turn Min PQ to Max PQ, why we do that? because, most times, we will have min PQ or max PQ, so, we should find a way to convert it into other PQ.
+To turn Min PQ to Max PQ, why we do that? because, most times, we will have min PQ or max PQ, so, we should find a way to convert it into other PQ.
 
- To do that, we can abuse the fact, every elements in priority queue is comparable data, so they must implement a some comparable interface, which we can simply negate to attain alternate version of PQ by doing this when adding and polling.
+To do that, we can abuse the fact, every elements in priority queue is comparable data, so they must implement a some comparable interface, which we can simply negate to attain alternate version of PQ by doing this when adding and polling.
 
- As we already said, priroity queue is Abstract Data Type(ADT), which only defines behaviour of DS, so it can be implemented in any DS(Data Structure), but we are using heap to implement it. because, it obtains us best time complexity. but we can implement the same with unordered list also, but in that case, time complexity becomes harder.
+As we already said, priroity queue is Abstract Data Type(ADT), which only defines behaviour of DS, so it can be implemented in any DS(Data Structure), but we are using heap to implement it. because, it obtains us best time complexity. but we can implement the same with unordered list also, but in that case, time complexity becomes harder.
 
- so only sometimes, prirority queues are often called, heaps. but that's not technically correct.
+so only sometimes, prirority queues are often called, heaps. but that's not technically correct.
 
- using a hash table or any optimization requires time/space tradeoff, means it will require linear space and additional overhead to pull this off.
+using a hash table or any optimization requires time/space tradeoff, means it will require linear space and additional overhead to pull this off.
 
+### Hash Table
 
- ### Hash Table
+Hash Table is provides mapping to keys to values using hash function. It is abstract associative array data type implementation.
 
- Hash Table is provides mapping to keys to values using hash function. It is abstract associative array data type implementation.
+Hash Table keys should be unique, but not values.
 
- Hash Table keys should be unique, but not values.
+Hash table keys should be hashable, it can support any type of data that can be hashable.
 
- Hash table keys should be hashable, it can support any type of data that can be hashable.
+Hash function basically means converting keys to a whole number and reduce it to a given range.
 
- Hash function basically means converting keys to a whole number and reduce it to a given range.
+Properties of Hash Function
 
- Properties of Hash Function
+- Hash function should satisfy this, H(x) == H(y), then they might be equal, it indicates collision cases, we need to check further to know, whether it is really equal, but if Hash function say H(x) != H(y) then they are not at all equal.
 
- - Hash function should satisfy this, H(x) == H(y), then they might be equal, it indicates collision cases, we need to check further to know, whether it is really equal, but if Hash function say H(x) != H(y) then they are not at all equal.
+ex) file comparison, rather than comparing two big files in byte - byte identical manner, we can compare hashes of those files to determine, is it not equal?
 
- ex) file comparison, rather than comparing two big files in byte - byte identical manner, we can compare hashes of those files to determine, is it not equal?
-
- - Hash function should be deterministic. kind of like pure function
-ex) H(x) produces Y, then it should always produce y for key x.
+- Hash function should be deterministic. kind of like pure function
+  ex) H(x) produces Y, then it should always produce y for key x.
 
 - Hash function should be uniform, so, hash function can reduce number of collision. A hash collision occurs, when hash function produces same value for two or more keys. so, we can utilize every table index.
-
 
 In hash table, we can do constant time insertion, lookup, deletion. but this attribute only achieved, if we have a uniform hash function. because, using hash functon, we indexing a value into Data structure.
 
@@ -240,8 +248,37 @@ How it handles it is, maintaining a separate DS, to hold all different values wh
 
 we can use any DS to handle this different value storage, but most common DS is linked list. and we can use binary tree, self balancing tree, but this DS are memory intensive and complext to implement.
 
-1) we are managing hash collision, but what about the case, where our HashTable(HT) is so full, and have long list of separate chains, in this scenario, how to maintain, constant time lookup O(1).
+1. we are managing hash collision, but what about the case, where our HashTable(HT) is so full, and have long list of separate chains, in this scenario, how to maintain, constant time lookup O(1).
 
 Once the HT becomes so full, we need to create HT with a large capacity, and rehash every value from old HT and disperse threm throught the new HT.
 
 P.S: Always keep in mind tradeoff for caching, if caching helps with reducing computation time with minimal complexity, then go for cache.
+
+**Open Addressing**
+Another one technique to solve the hash collision.
+
+When using a open addressing to resolved the hash collision, we don't use auxillary data structure like linked list used in separate chaining, rather than that, we store every key value pairs in same table
+
+This means, we have to greatly take care of hash table size regarding number of elements present in hash table. Load factor of hash table becomes so important.
+
+```
+    Load_Factor = no. of elements / total size of table
+
+    because, once the table becomes so full, it is very hard to find the slot for element to insert
+```
+
+According to experiments, once the load factor of table crossed certain threshold, then we need to increase the table size exponentially (ideally double the current size), otherwise constant time behaviour won't be there, it will be a lot worse.
+and For open addressing, this is more important than separate chaining, because, when load factor crossed certain threshold, they hash table perf is so worse.
+
+Main idea of Open Addressing
+Usually, when key is given, we hash it to obtain the index the key/value pair can go, but if that index is already belong to another one key, then we try to find different index in the hash table by doing offsetting from the index obtained by hash function, this offset is subject to probing sequence(P(x)). we keep doing this probing untill different slot is found.
+
+Open Addressing Techniques
+
+1) Linear Probing -> It uses linear function to find the index to insert the key/value pairs
+
+2) Quadratic Probing -> It uses quadratic function to do this
+
+3) Double Hashing -> basically, have secondary hash function to find the index for key/value pairs
+
+4) Pseudo random generator -> It basically uses the random number generator algorithm, but that is seeded with the returned value of our hash function, as our hash function is deterministic, this number generator algorithm will be too deterministic.

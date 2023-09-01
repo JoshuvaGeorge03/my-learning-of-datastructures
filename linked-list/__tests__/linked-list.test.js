@@ -131,7 +131,7 @@ describe("Going to test linked list data structure", () => {
     const returnedValue = {
       node: expect.any(Object),
       index: expect.any(Number),
-      data: expect.anything()
+      data: expect.anything(),
     };
     expect(list.searchBasedOnIndex(7).data).toBe(38);
     expect(list.searchBasedOnIndex(3).data).toBe(282);
@@ -140,5 +140,49 @@ describe("Going to test linked list data structure", () => {
     expect(list.searchBasedOnValue(363)).toBe(null);
     expect(list.searchBasedOnValue(383).index).toBe(1);
     expect(list.searchBasedOnValue(38).index).toBe(7);
+    expect(list.searchBasedOnValue(83)).toMatchObject(returnedValue);
+    expect(list.find((index, node) => node.data === 83).index).toBe(4);
+    expect(list.find((i, n) => i === 1).data).toBe(383);
+    expect(list.find((i, n) => n.data === 39)).toMatchObject(returnedValue);
+  });
+
+  it("should delete nodes from linked list correctly", () => {
+    const list = new LinkedList();
+    expect(list.deleteWithValue(9)).toBe(null);
+    list
+      .prepend(9)
+      .append(83)
+      .insertAtIndex(1, 282)
+      .append(39)
+      .prepend(383)
+      .insertAtIndex(4, 283)
+      .append(38)
+      .prepend(37);
+    expect(list.deleteWithValue(800)).toBe(null);
+    list.deleteWithValue(9)
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      37, 383, 282, 83, 283, 39, 38,
+    ]);
+    list.deleteWithValue(38);
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      37, 383, 282, 83, 283, 39
+    ]);
+    list.deleteWithValue(37);
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      383, 282, 83, 283, 39
+    ]);
+
+    const newList = new LinkedList();
+    expect(newList.deleteWithIndex(1)).toBe(null);
+    newList
+      .prepend(9)
+      .append(83)
+      .insertAtIndex(1, 282)
+      .append(39)
+      .prepend(383)
+      .insertAtIndex(4, 283)
+      .append(38)
+      .prepend(37);
+    expect(newList.deleteWithIndex(9)).toBe(null);
   });
 });
