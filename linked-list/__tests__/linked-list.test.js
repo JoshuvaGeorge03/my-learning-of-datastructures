@@ -163,11 +163,11 @@ describe("Going to test linked list data structure", () => {
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
       37, 383, 282, 83, 283, 39, 38,
     ]);
-    list.deleteWithValue(38);
+    expect(list.deleteWithValue(38)).toEqual(expect.objectContaining(['data', 'next']));
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
       37, 383, 282, 83, 283, 39
     ]);
-    list.deleteWithValue(37);
+    expect(list.deleteWithValue(37)).toBe('object');
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
       383, 282, 83, 283, 39
     ]);

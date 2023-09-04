@@ -275,10 +275,40 @@ Usually, when key is given, we hash it to obtain the index the key/value pair ca
 
 Open Addressing Techniques
 
-1) Linear Probing -> It uses linear function to find the index to insert the key/value pairs
+1. Linear Probing -> It uses linear function to find the index to insert the key/value pairs
 
-2) Quadratic Probing -> It uses quadratic function to do this
+2. Quadratic Probing -> It uses quadratic function to do this
 
-3) Double Hashing -> basically, have secondary hash function to find the index for key/value pairs
+3. Double Hashing -> basically, have secondary hash function to find the index for key/value pairs
 
-4) Pseudo random generator -> It basically uses the random number generator algorithm, but that is seeded with the returned value of our hash function, as our hash function is deterministic, this number generator algorithm will be too deterministic.
+4. Pseudo random generator -> It basically uses the random number generator algorithm, but that is seeded with the returned value of our hash function, as our hash function is deterministic, this number generator algorithm will be too deterministic.and it will be keep incremented by 1 to find open slot.
+
+General insertion algorithm for open addressing for the table size of n.
+
+```
+x = 1; keyHash = H(k); index = keyHash;
+
+while (table[index] !== null) {
+    index = keyHash + (P(k,x) % n)
+    x = x + 1
+}
+
+insert (k, v) at the table[index]
+
+```
+
+where H(k) is the hash function, P(k,x) -> probing sequence function.
+
+Open addressing resolution techniques probing sequences cause cycles
+
+probing sequences can cause infinite loop, if they produce shorter cycles than N(table size);
+
+which means, the cycle of index/buckets they produce, are already filled with key value pairs in hash table, than they stuck in an inifinite loop.
+
+How do we handle this looping probing scenarios?
+
+we don't handle this issue, what we will do is, we will avoid this issue altogether, we will not basically put any probing sequence, we will only select probing sequence, that produce cycel of table length N.
+
+Lineary Probing, Quadratic probing, double hashing all are subject to the issue of cycles, which is why we choose selective probing sequences, which produce cycles of length N.
+
+Open addressing techniques more senstive to the hashing function and probing sequence used, but separate chainig related techniques don't need to worry about that.
