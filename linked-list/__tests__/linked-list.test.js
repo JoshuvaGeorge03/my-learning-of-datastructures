@@ -148,6 +148,10 @@ describe("Going to test linked list data structure", () => {
 
   it("should delete nodes from linked list correctly", () => {
     const list = new LinkedList();
+    const returnedObject = {
+      data: expect.any(Number),
+      next: expect.any(Object),
+    };
     expect(list.deleteWithValue(9)).toBe(null);
     list
       .prepend(9)
@@ -159,17 +163,17 @@ describe("Going to test linked list data structure", () => {
       .append(38)
       .prepend(37);
     expect(list.deleteWithValue(800)).toBe(null);
-    list.deleteWithValue(9)
+    expect(list.deleteWithValue(9)).toMatchObject(returnedObject);
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
       37, 383, 282, 83, 283, 39, 38,
     ]);
-    expect(list.deleteWithValue(38)).toEqual(expect.objectContaining(['data', 'next']));
+    expect(list.deleteWithValue(38)).toMatchObject(returnedObject);
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
-      37, 383, 282, 83, 283, 39
+      37, 383, 282, 83, 283, 39,
     ]);
-    expect(list.deleteWithValue(37)).toBe('object');
+    expect(list.deleteWithValue(37)).toMatchObject(returnedObject);
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
-      383, 282, 83, 283, 39
+      383, 282, 83, 283, 39,
     ]);
 
     const newList = new LinkedList();
@@ -184,5 +188,13 @@ describe("Going to test linked list data structure", () => {
       .append(38)
       .prepend(37);
     expect(newList.deleteWithIndex(9)).toBe(null);
+    expect(newList.deleteWithIndex(393)).toBe(null);
+    expect(newList.deleteWithIndex(0)).toMatchObject(returnedObject);
+    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([383, 9, 282, 83, 283, 39, 38]);
+    expect(newList.deleteWithIndex(7)).toBe(null);
+    expect(newList.deleteWithIndex(6)).toMatchObject(returnedObject);
+    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([383, 9, 282, 83, 283, 39]);
+    expect(newList.deleteWithIndex(2)).toMatchObject(returnedObject);
+    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([383, 9, 83, 283, 39]);
   });
 });

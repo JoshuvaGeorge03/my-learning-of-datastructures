@@ -160,6 +160,7 @@ export class LinkedList {
         if (currentNode.next.data === data) {
           deletedNode = currentNode.next;
           currentNode.next = currentNode.next.next;
+          break;
         } else {
           currentNode = currentNode.next;
         }
@@ -198,6 +199,7 @@ export class LinkedList {
           if (deletedNode === this.tail) {
             this.tail = currentNode;
           }
+          break;
         } else {
           currentNode = currentNode.next;
           currentIndex += 1;
