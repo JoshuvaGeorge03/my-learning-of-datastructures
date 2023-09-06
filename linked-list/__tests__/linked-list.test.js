@@ -197,4 +197,31 @@ describe("Going to test linked list data structure", () => {
     expect(newList.deleteWithIndex(2)).toMatchObject(returnedObject);
     expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([383, 9, 83, 283, 39]);
   });
+
+  test('whether taile and head direct deletion work correctly', () => {
+    const list = new LinkedList();
+    expect(list.deleteHead()).toBe(null);
+    expect(list.deleteTail()).toBe(null);
+    list.prepend(9)
+    const returnedObject = {
+      data: expect.any(Number),
+      next: expect.any(Object)
+    };
+    expect(list.deleteTail()).toMatchObject(returnedObject);
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([]);
+    list.prepend(9).append(99);
+    expect(list.deleteHead()).toMatchObject(returnedObject);
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([99]);
+    expect(list.deleteTail()).toMatchObject(returnedObject);
+    list
+    .prepend(9)
+    .append(83)
+    .insertAtIndex(1, 282)
+    .append(39)
+    .prepend(383)
+    .insertAtIndex(4, 283)
+    .append(38)
+    .prepend(37);
+  });
+
 });

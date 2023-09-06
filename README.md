@@ -312,3 +312,30 @@ we don't handle this issue, what we will do is, we will avoid this issue altoget
 Lineary Probing, Quadratic probing, double hashing all are subject to the issue of cycles, which is why we choose selective probing sequences, which produce cycles of length N.
 
 Open addressing techniques more senstive to the hashing function and probing sequence used, but separate chainig related techniques don't need to worry about that.
+
+1) Linear Probing
+
+It is basically Probing method, which uses linear formula to probe.
+
+P(x) = a(x) + b (a != 0) (b is constant)
+
+But developing this linear formula, needs careful evaulation, because, not all probing function prodcue the cyle of N, we may end up with infinite loop.
+
+How to produce linear formula, which produce the cycle of N? P(x) = a(x)
+
+This happens, when a, N are relatively prime, two numbers are relatively prime, if they have Greatest common denominator of 1.
+
+GCD(a, N) = 1
+
+When this happens, then probing function always produce the cycle of N, then we can prodcue the empty bucket.
+
+ex) Table size (N) = 9, Probing function P(x) = 6x, Load Factor (alpha) = 0.75, max threshold = 6;
+
+But this Probing function, will result into infinite loop, because GCD of (9,6) is 3 not 1.
+
+P(x) = 1x can always produce a cycle of N, so it's always a popular choice.
+
+when we hit a max threshold value, we need to scale up the hash table, we usually, do it in exponential way, but whatever we do, we need to ensure, we do it in a way GCD of (a, N) = 1. 
+
+
+and then, we allocate new chunk of memory for new table, then we need to take content from old table to re-insert it again on the new table. and after re-insert key/value pari in the new table, throw away the old table.

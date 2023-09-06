@@ -250,11 +250,6 @@ export class LinkedList {
 
     let deletedNode = this.tail;
 
-    if (this.head === this.tail) {
-      this.head = null;
-      this.tail = null;
-    }
-
     let curretnNode = this.head;
 
     while (curretnNode.next) {
@@ -264,6 +259,11 @@ export class LinkedList {
         break;
       }
       curretnNode = curretnNode.next;
+    }
+
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
     }
 
     return deletedNode;
