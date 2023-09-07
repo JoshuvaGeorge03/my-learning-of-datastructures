@@ -190,22 +190,28 @@ describe("Going to test linked list data structure", () => {
     expect(newList.deleteWithIndex(9)).toBe(null);
     expect(newList.deleteWithIndex(393)).toBe(null);
     expect(newList.deleteWithIndex(0)).toMatchObject(returnedObject);
-    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([383, 9, 282, 83, 283, 39, 38]);
+    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      383, 9, 282, 83, 283, 39, 38,
+    ]);
     expect(newList.deleteWithIndex(7)).toBe(null);
     expect(newList.deleteWithIndex(6)).toMatchObject(returnedObject);
-    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([383, 9, 282, 83, 283, 39]);
+    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      383, 9, 282, 83, 283, 39,
+    ]);
     expect(newList.deleteWithIndex(2)).toMatchObject(returnedObject);
-    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([383, 9, 83, 283, 39]);
+    expect(newList.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      383, 9, 83, 283, 39,
+    ]);
   });
 
-  test('whether taile and head direct deletion work correctly', () => {
+  test("whether taile and head direct deletion work correctly", () => {
     const list = new LinkedList();
     expect(list.deleteHead()).toBe(null);
     expect(list.deleteTail()).toBe(null);
-    list.prepend(9)
+    list.prepend(9);
     const returnedObject = {
       data: expect.any(Number),
-      next: expect.any(Object)
+      next: expect.any(Object),
     };
     expect(list.deleteTail()).toMatchObject(returnedObject);
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([]);
@@ -213,15 +219,37 @@ describe("Going to test linked list data structure", () => {
     expect(list.deleteHead()).toMatchObject(returnedObject);
     expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([99]);
     expect(list.deleteTail()).toMatchObject(returnedObject);
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([]);
     list
-    .prepend(9)
-    .append(83)
-    .insertAtIndex(1, 282)
-    .append(39)
-    .prepend(383)
-    .insertAtIndex(4, 283)
-    .append(38)
-    .prepend(37);
+      .prepend(9)
+      .append(83)
+      .insertAtIndex(1, 282)
+      .append(39)
+      .prepend(383)
+      .insertAtIndex(4, 283)
+      .append(38)
+      .prepend(37);
+    expect(list.deleteTail()).toMatchObject(returnedObject);
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      37, 383, 9, 282, 83, 283, 39,
+    ]);
+    list.deleteHead();
+    expect(list.toArray(getValueOnlyFromLinkedListNode)).toEqual([
+      383, 9, 282, 83, 283, 39,
+    ]);
   });
 
+  it("should converta array to linked list correctly", () => {
+    const list = new LinkedList();
+    const array = [1, 2, 3, 4, 5];
+    expect(list.fromArray().toArray(getValueOnlyFromLinkedListNode)).toEqual(
+      []
+    );
+    expect(list.fromArray([1]).toArray(getValueOnlyFromLinkedListNode)).toEqual(
+      [1]
+    );
+    expect(
+      list.fromArray(array).toArray(getValueOnlyFromLinkedListNode)
+    ).toEqual([1, 1, 2, 3, 4, 5]);
+  });
 });

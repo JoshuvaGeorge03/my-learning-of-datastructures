@@ -240,7 +240,8 @@ export class LinkedList {
   }
 
   fromArray(values = dummyArr) {
-    return values.forEach((value) => this.append(value));
+    values.forEach((value) => this.append(value));
+    return this;
   }
 
   deleteTail() {
@@ -249,6 +250,12 @@ export class LinkedList {
     }
 
     let deletedNode = this.tail;
+
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+      return deletedNode;
+    }
 
     let curretnNode = this.head;
 
@@ -261,10 +268,6 @@ export class LinkedList {
       curretnNode = curretnNode.next;
     }
 
-    if (this.head === this.tail) {
-      this.head = null;
-      this.tail = null;
-    }
 
     return deletedNode;
   }

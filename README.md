@@ -339,3 +339,7 @@ when we hit a max threshold value, we need to scale up the hash table, we usuall
 
 
 and then, we allocate new chunk of memory for new table, then we need to take content from old table to re-insert it again on the new table. and after re-insert key/value pari in the new table, throw away the old table.
+
+2) Quadratic Probing
+
+3) Double Hashing
