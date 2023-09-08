@@ -342,4 +342,24 @@ and then, we allocate new chunk of memory for new table, then we need to take co
 
 2) Quadratic Probing
 
+Like Lineary Probing, we are using quadratic probing to find offset value from keyhash.
+
+Quadratic probing means, we have quadratic formular basically, a(x^2) + b(x) + c (a,b,c are constants)
+and a !== 0 (otherwise, we will basically do linear probing)
+
+but not all Quadratic probing function are viable, means, function not producing the cycle of order N. we may result into cycle.
+
+There are lot of approaches to derive the quadratic probing function that produce the cycles of N, let's look at them
+
+- keep table size Number a prime number > 3, and load threshold less than 1/2 and P(x) = x^2;
+
+- P(x) = (x^2 + x) / 2 and keep table size the power of N.
+
+ex)  P(x) = (x^2 + x) / 2 and table size = 2^3 = 8 and max load factor = 0.7 and threshold before resize = 6;
+
+If we hit a condition, where we need to re-arrange the tale size, before doing another insertion, always make sure, our table size remain as the pwer of two value.
+
+when we are going to insert a key, we are going to check if the key is already present, then, we update the value of the key.
+
+
 3) Double Hashing
