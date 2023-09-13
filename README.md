@@ -363,3 +363,27 @@ when we are going to insert a key, we are going to check if the key is already p
 
 
 3) Double Hashing
+
+Like other probing, when we hit collision, we use probing technique double hashing to find offset value for the keyhash and once we find the freeslot, we insert key/value pair.
+
+DH or double hashing, which probes according to the, constant multiple of another hash function.
+
+p(k,x) = x * hash^2(k)
+
+Hash function one and two should hash to the same key.
+
+it can be told linear probing, except that constant is unknown until runtime.
+
+Since, DH reduces to linear probing at runtime, it may end up with a shorter cycle to produce infinite loop.
+
+To fix cycle issue, we need to have table size of prime number and we need to calculate theta
+
+theta  = H^2(k) mod N 
+
+keyhash  = H1(k) + (0 * theta ) modulo N -> if empty, use that keyhash otherwise,
+keyhash  = H1(k) + (1 * theta ) modulo N
+
+
+if theta value is 0, which result into infinite loop, so, when we have zero as a value, change it to 1.
+
+when we hit a max threshold value, then do resize exponentially (2N), and find the next prime number above that value.
