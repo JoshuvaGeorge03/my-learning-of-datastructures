@@ -387,3 +387,23 @@ keyhash  = H1(k) + (1 * theta ) modulo N
 if theta value is 0, which result into infinite loop, so, when we have zero as a value, change it to 1.
 
 when we hit a max threshold value, then do resize exponentially (2N), and find the next prime number above that value.
+
+**How to find and remove key/value pair in Hashtable using open addressing to manage hash collision?**
+
+When we search for specific key, we find hash value for a key, then go to that index and look whether the current key to search matches the key value that is present in the hashtable. if so, we find a match, return it's value, otherwise, we use a probing function to find offset of hash value and then repeat the same, untill we hitt a null node in a hash table, then we can conclude, that this key is not present inside of the hash table.
+
+Removing is sam e as finding a key index in a hash table, then clears that node. This is naive removing, this can cause problems, when querying/finding a value in a table, we may hit a null node, even that value present in a hashtable.
+
+ex) Assume k1,k2,k3 hash to same index 1, we inserts them via probing sequence hash collision. P(x) = x; then, they will be inserted in the order 1,2,3 and now, we have removed a key k2 from a hashtable in a naive removing way, so, we find a index of the key, then we set that index to null. now, we are going to query for k3, but as we are aware, we will hit a null node at index 2, so, we terminate the search and tell, this key not present. but, this key is present in a hash table as we know.
+
+To fix this issue, we are not going to set null value, we are going to place a unique marker called a `tombstone` instead of a null to indicate that the key/value pair is deleted, and that bucket should be skipped during a search.
+
+In our HT, we have lot of tombstones, how do we get rid of them? 
+
+The tombstone itself counted as filled slots, so they participate in load factor, and they will be removed, when we resize the HT with a new table. And also, they can be replaced when we inserta new key/value pair.
+
+**Optimization when searching**
+When we search for key, if we hit a tombstone, before finding a key and if key is eventually found, then we can replace key/value pair value from position it's currently present to the first tombstone position we hit when we searched for this key.
+
+This is call lazy deletion, to optimize for querying when we do it next time.
+
