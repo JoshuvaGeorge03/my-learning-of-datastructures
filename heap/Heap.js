@@ -3,9 +3,13 @@ const {
   doNothingExceptReturningPassedArgument,
 } = require("../utils/default-value-assignment");
 export default class BinaryHeap {
-  constructor(extractValueFromHeap = doNothingExceptReturningPassedArgument) {
+  constructor(
+    extractValueFromHeap = doNothingExceptReturningPassedArgument,
+    extractPriorityFromHeap = doNothingExceptReturningPassedArgument
+  ) {
     this.heapContainer = [];
     this.extractValueFromHeap = extractValueFromHeap;
+    this.extractPriorityFromHeap = extractPriorityFromHeap;
   }
 
   getValue(index) {
@@ -131,7 +135,7 @@ export default class BinaryHeap {
   }
 
   clear() {
-    if(this.isEmpty()) return 0
+    if (this.isEmpty()) return 0;
     while (this.heapContainer.length) {
       this.heapContainer.pop();
     }
@@ -139,9 +143,11 @@ export default class BinaryHeap {
   }
 
   contains(value) {
-    return Boolean(this.heapContainer.some(
-      (heapValue) => this.extractValueFromHeap(heapValue) === value
-    ));
+    return Boolean(
+      this.heapContainer.some(
+        (heapValue) => this.extractValueFromHeap(heapValue) === value
+      )
+    );
   }
 
   find(cb) {
@@ -155,8 +161,8 @@ export default class BinaryHeap {
     while (
       this.hasParent(currentIndex) &&
       !this.pairIsInCorrectOrder(
-        this.extractValueFromHeap(this.heapContainer[currentIndex]),
-        this.extractValueFromHeap(this.getParentValue(currentIndex))
+        this.extractPriorityFromHeap(this.heapContainer[currentIndex]),
+        this.extractPriorityFromHeap(this.getParentValue(currentIndex))
       )
     ) {
       this.swap(
@@ -170,18 +176,18 @@ export default class BinaryHeap {
 
   heapifyDown(indexToStart) {
     let currentIndex = indexToStart;
-    let rightChildValue = this.getValue(this.getRightChildIndex(currentIndex));
-    let leftChildValue = this.getValue(this.getLeftChildIndex(currentIndex));
+    let rightChildValue = this.extractPriorityFromHeap(this.getValue(this.getRightChildIndex(currentIndex)));
+    let leftChildValue = this.extractPriorityFromHeap(this.getValue(this.getLeftChildIndex(currentIndex)));
     while (
       (this.isLeftChildExist(currentIndex) ||
         this.isRightChildExist(currentIndex)) &&
       (!this.pairIsInCorrectOrder(
         leftChildValue,
-        this.getValue(currentIndex)
+        this.extractPriorityFromHeap(this.getValue(currentIndex))
       ) ||
         !this.pairIsInCorrectOrder(
           rightChildValue,
-          this.getValue(currentIndex)
+          this.extractPriorityFromHeap(this.getValue(currentIndex))
         ))
     ) {
       const isBothLeftAndRightChildAreSame = rightChildValue === leftChildValue;
