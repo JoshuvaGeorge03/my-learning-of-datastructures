@@ -213,8 +213,8 @@ export default class BinaryHeap {
     }
   }
 
-  toArray(extractValueFn = doNothingExceptReturningPassedArgument) {
-    return this.heapContainer.map(extractValueFn);
+  toArray() {
+    return this.heapContainer.map(this.extractValueFromHeap);
   }
 
   toString() {

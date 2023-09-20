@@ -14,8 +14,7 @@ export default class PriorityQueue extends BinaryHeap {
   }
 
   add(item, priority) {
-    super.add({ value: item, priority });
-    return this;
+    return super.add({ value: item, priority });
   }
 
   defaultComparator(a, b) {
