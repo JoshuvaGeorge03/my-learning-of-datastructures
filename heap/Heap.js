@@ -121,7 +121,7 @@ export default class BinaryHeap {
     const removedValue = this.heapContainer.pop();
     // need to bubble down to staisfies the heap invariant
     this.heapifyDown(this.getStartIndex());
-    return removedValue;
+    return this.extractValueFromHeap(removedValue);
   }
 
   add(value) {

@@ -1,11 +1,12 @@
 import PriorityQueue from "../priority-queue";
 
 describe("PriorityQueue", () => {
-  test("empty", () => {});
   let pq = new PriorityQueue();
+
   beforeEach(() => {
-    let pq = new PriorityQueue();
+    pq = new PriorityQueue();
   });
+
   test("ensure add functionality", () => {
     pq.add({ jos: "dkd" }, 8);
     expect(pq.toArray()).toEqual([{ jos: "dkd" }]);
@@ -22,5 +23,16 @@ describe("PriorityQueue", () => {
       93,
       90,
     ]);
+  });
+
+  test("ensure remove functionality", () => {
+    const removedValue = pq.remove();
+    expect(removedValue).toBe(null);
+    pq.add({ jos: "dkd" }, 8);
+    pq.add(90, 5);
+    pq.add(93, 3).add(38, 1).add({ what: "me" }, 0).add(34, 2);
+    expect(pq.remove()).toEqual({ what: "me" });
+    expect(pq.toArray()).toEqual([38, 93, 34, { jos: "dkd" }, 90]);
+    expect(pq.remove()).toBe(38);
   });
 });
