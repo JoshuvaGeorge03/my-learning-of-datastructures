@@ -21,6 +21,14 @@ export default class PriorityQueue extends BinaryHeap {
     return super.poll();
   }
 
+  contains(value) {
+    return super.contains(value);
+  }
+
+  find(cb) {
+    return super.find(cb);
+  }
+
   defaultComparator(a, b) {
     return new MinHeap().pairIsInCorrectOrder(a, b);
   }
