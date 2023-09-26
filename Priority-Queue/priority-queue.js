@@ -9,10 +9,6 @@ export default class PriorityQueue extends BinaryHeap {
     this.customComparator = customComparator;
   }
 
-  getValueFromHeap(item) {
-    return item.value;
-  }
-
   add(item, priority) {
     return super.add({ value: item, priority });
   }
