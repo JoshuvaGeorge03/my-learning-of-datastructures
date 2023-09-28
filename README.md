@@ -407,3 +407,7 @@ When we search for key, if we hit a tombstone, before finding a key and if key i
 
 This is call lazy deletion, to optimize for querying when we do it next time.
 
+
+### Trie
+
+it is tree like data structure. it is also called prefix tree or radix tree or digital tree.
