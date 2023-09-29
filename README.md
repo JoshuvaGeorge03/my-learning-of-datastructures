@@ -410,4 +410,14 @@ This is call lazy deletion, to optimize for querying when we do it next time.
 
 ### Trie
 
-it is tree like data structure. it is also called prefix tree or radix tree or digital tree.
+it is a tree data structure. it is also called prefix tree(because it can be searched with prefixes) or radix tree or digital tree.
+
+It is kind of search tree data structure. but, unlike a binary search tree, each node don't contains key of the node, but the position of the node determines the key of the node.
+
+all descendant nodes have common prefix associated with it and root is assoicated with the empty string.
+
+and values are not assoicated with every node, values are only assoicated with leaf nodes.
+
+if we want space optimizations, we can implement it using compact prefix tree.
+
+it is used for usecases like, associative array kind of cases.
