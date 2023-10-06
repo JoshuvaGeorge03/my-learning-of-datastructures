@@ -8,6 +8,6 @@ export default function HelloWorld() {
 }
 
 
-const root = createRoot(document.getElementById('app'));
+// const root = createRoot(document.getElementById('app'));
 
-root.render(<HelloWorld />);
+// root.render(<HelloWorld />);

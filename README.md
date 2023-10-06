@@ -313,7 +313,7 @@ Lineary Probing, Quadratic probing, double hashing all are subject to the issue 
 
 Open addressing techniques more senstive to the hashing function and probing sequence used, but separate chainig related techniques don't need to worry about that.
 
-1) Linear Probing
+1. Linear Probing
 
 It is basically Probing method, which uses linear formula to probe.
 
@@ -335,12 +335,11 @@ But this Probing function, will result into infinite loop, because GCD of (9,6) 
 
 P(x) = 1x can always produce a cycle of N, so it's always a popular choice.
 
-when we hit a max threshold value, we need to scale up the hash table, we usually, do it in exponential way, but whatever we do, we need to ensure, we do it in a way GCD of (a, N) = 1. 
-
+when we hit a max threshold value, we need to scale up the hash table, we usually, do it in exponential way, but whatever we do, we need to ensure, we do it in a way GCD of (a, N) = 1.
 
 and then, we allocate new chunk of memory for new table, then we need to take content from old table to re-insert it again on the new table. and after re-insert key/value pari in the new table, throw away the old table.
 
-2) Quadratic Probing
+2. Quadratic Probing
 
 Like Lineary Probing, we are using quadratic probing to find offset value from keyhash.
 
@@ -355,20 +354,19 @@ There are lot of approaches to derive the quadratic probing function that produc
 
 - P(x) = (x^2 + x) / 2 and keep table size the power of N.
 
-ex)  P(x) = (x^2 + x) / 2 and table size = 2^3 = 8 and max load factor = 0.7 and threshold before resize = 6;
+ex) P(x) = (x^2 + x) / 2 and table size = 2^3 = 8 and max load factor = 0.7 and threshold before resize = 6;
 
 If we hit a condition, where we need to re-arrange the tale size, before doing another insertion, always make sure, our table size remain as the pwer of two value.
 
 when we are going to insert a key, we are going to check if the key is already present, then, we update the value of the key.
 
-
-3) Double Hashing
+3. Double Hashing
 
 Like other probing, when we hit collision, we use probing technique double hashing to find offset value for the keyhash and once we find the freeslot, we insert key/value pair.
 
 DH or double hashing, which probes according to the, constant multiple of another hash function.
 
-p(k,x) = x * hash^2(k)
+p(k,x) = x \* hash^2(k)
 
 Hash function one and two should hash to the same key.
 
@@ -378,11 +376,10 @@ Since, DH reduces to linear probing at runtime, it may end up with a shorter cyc
 
 To fix cycle issue, we need to have table size of prime number and we need to calculate theta
 
-theta  = H^2(k) mod N 
+theta = H^2(k) mod N
 
-keyhash  = H1(k) + (0 * theta ) modulo N -> if empty, use that keyhash otherwise,
-keyhash  = H1(k) + (1 * theta ) modulo N
-
+keyhash = H1(k) + (0 _ theta ) modulo N -> if empty, use that keyhash otherwise,
+keyhash = H1(k) + (1 _ theta ) modulo N
 
 if theta value is 0, which result into infinite loop, so, when we have zero as a value, change it to 1.
 
@@ -398,7 +395,7 @@ ex) Assume k1,k2,k3 hash to same index 1, we inserts them via probing sequence h
 
 To fix this issue, we are not going to set null value, we are going to place a unique marker called a `tombstone` instead of a null to indicate that the key/value pair is deleted, and that bucket should be skipped during a search.
 
-In our HT, we have lot of tombstones, how do we get rid of them? 
+In our HT, we have lot of tombstones, how do we get rid of them?
 
 The tombstone itself counted as filled slots, so they participate in load factor, and they will be removed, when we resize the HT with a new table. And also, they can be replaced when we inserta new key/value pair.
 
@@ -407,17 +404,18 @@ When we search for key, if we hit a tombstone, before finding a key and if key i
 
 This is call lazy deletion, to optimize for querying when we do it next time.
 
-
 ### Trie
 
 it is a tree data structure. it is also called prefix tree(because it can be searched with prefixes) or radix tree or digital tree.
 
-It is kind of search tree data structure. but, unlike a binary search tree, each node don't contains key of the node, but the position of the node determines the key of the node.
+It is kind of search tree data structure or ordered tree data structure, which is used for usecases like, associative array or dynamic set kind of cases..
 
-all descendant nodes have common prefix associated with it and root is assoicated with the empty string.
+Unlike a binary search tree, each node don't contains key of the node, but the position of the node determines the key of the node.
 
-and values are not assoicated with every node, values are only assoicated with leaf nodes.
+all descendant nodes have common prefix associated with it and root is assoicated with the empty string. and values are not assoicated with every node, values are only assoicated with leaf nodes.
 
 if we want space optimizations, we can implement it using compact prefix tree.
 
-it is used for usecases like, associative array kind of cases.
+each node in the tree contains, whether it is endofword(bool) and data(if it is end of word) and link to next children in the tree;
+
+it can be used for autocomplete implementations.
