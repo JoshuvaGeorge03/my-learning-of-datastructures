@@ -28,7 +28,12 @@ export default class Trie {
     }
 
     toArray() {
-        return this.root.toArray();
+        let nodeChildren = this.root.childrens;
+        let i = 0;
+        let trieArray = [];
+        while(nodeChildren.getKeys().length > 0) {
+            trieArray.push(...nodeChildren.getKeys());
+        }
     }
 
     toString() {
