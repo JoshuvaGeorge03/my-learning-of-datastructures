@@ -7,8 +7,17 @@ export default class Trie {
         this.root = new TrieNode(RootNodeChar, false, null);
     }
 
-    addWord() {
+    addWord(word) {
+        const wordLength = word.length;
+        let node = this.root;
 
+        for(let i = 0; i < wordLength; i++) {
+            const characterOfAWord = wordLength[i];
+            const isEndOfWord = i + 1 === wordLength;
+            node = node.addChild(characterOfAWord, isEndOfWord);
+        }
+
+        return this;
     }
 
     deleteWord() {
