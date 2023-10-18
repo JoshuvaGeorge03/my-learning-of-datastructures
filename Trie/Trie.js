@@ -12,7 +12,7 @@ export default class Trie {
         let node = this.root;
 
         for(let i = 0; i < wordLength; i++) {
-            const characterOfAWord = wordLength[i];
+            const characterOfAWord = word[i];
             const isEndOfWord = i + 1 === wordLength;
             node = node.addChild(characterOfAWord, isEndOfWord);
         }
@@ -20,12 +20,12 @@ export default class Trie {
         return this;
     }
 
-    deleteWord() {
-
+    deleteWord(word) {
+        const toBeDeletedWord = Array.from(word);
     }
 
-    hasWordExist() {
-
+    hasWordExist(word) {
+        
     }
 
     suggestNextCharacters() {

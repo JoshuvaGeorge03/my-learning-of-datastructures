@@ -15,7 +15,9 @@ export default class TrieNode {
       node.isEndOfWord = isEndOfWord;
       return node;
     }
-    return new TrieNode(char, isEndOfWord);
+    const node = new TrieNode(char, isEndOfWord);
+    this.childrens.set(char, node);
+    return node;
   }
 
   removeChild() {}
