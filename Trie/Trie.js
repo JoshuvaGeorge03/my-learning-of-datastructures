@@ -25,7 +25,29 @@ export default class Trie {
     }
 
     hasWordExist(word) {
-        
+        const wordArr = Array.from(word);
+
+        if(!wordArr.length) {
+            return false
+        }
+
+        let currentNode = this.root;
+        let wordArrLength = wordArr.length;
+
+        for(let i = 0; i < wordArrLength; i++) {
+            if(!currentNode.isChildExist(char)) {
+                return false;
+            }
+
+            
+            currentNode = currentNode.getCharNode(char);
+
+            if(i + 1 === wordArrLength) {
+                return currentNode.isEndOfWord();
+            }
+        }
+
+        return false;
     }
 
     suggestNextCharacters() {

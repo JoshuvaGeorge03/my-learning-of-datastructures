@@ -11,7 +11,7 @@ export default class TrieNode {
 
   addChild(char, isEndOfWord) {
     if (this.childrens.has(char)) {
-      const node = this.childrens.get(char);
+      const node = this.getCharNode(char);
       node.isEndOfWord = isEndOfWord;
       return node;
     }
@@ -22,13 +22,25 @@ export default class TrieNode {
 
   removeChild() {}
 
-  isEndOfWord() {}
+  isEndOfWord() {
+    return this.isEndOfWord;
+  }
+
+  isChildExist(char) {
+    return this.childrens.has(char);
+  }
+
+  getCharNode(char) {
+    return this.childrens.get(char);
+  }
 
   hasSuggestions() {}
 
   getSuggestions() {}
 
-  toString() {}
+  toString() {
+    return this.toArray().join();
+  }
 
   toArray() {
     return this.childrens.getKeys();
