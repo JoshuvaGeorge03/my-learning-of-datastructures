@@ -22,40 +22,43 @@ export default class Trie {
 
     deleteWord(word) {
         const toBeDeletedWord = Array.from(word);
+        if(this.hasWordExist(word)) {
+            const lasCharNode = this.getLasCharacterNode(word);
+            if(!lasCharNode.isChildrenPresent()) {
+
+            }
+        }
+        return null;
     }
 
     hasWordExist(word) {
-        const wordArr = Array.from(word);
-
-        if(!wordArr.length) {
-            return false
-        }
-
-        let currentNode = this.root;
-        let wordArrLength = wordArr.length;
-
-        for(let i = 0; i < wordArrLength; i++) {
-            if(!currentNode.isChildExist(char)) {
-                return false;
-            }
-
-            
-            currentNode = currentNode.getCharNode(char);
-
-            if(i + 1 === wordArrLength) {
-                return currentNode.isEndOfWord();
-            }
-        }
-
-        return false;
+        const lasCharNode = this.getLasCharacterNode(word);
+        return Boolean(lasCharNode && lasCharNode.isEndOfWord());
     }
 
     suggestNextCharacters() {
 
     }
 
-    getLasCharacterNode(){
+    getLasCharacterNode(word){
+        const wordArr = Array.from(word);
 
+        if(!wordArr.length) {
+            return null
+        }
+
+        let currentNode = this.root;
+        let wordArrLength = wordArr.length;
+
+        for(let i = 0; i < wordArrLength; i++) {
+            if(!currentNode.isChildExist(wordArr[i])) {
+                return null;
+            }
+
+            currentNode = currentNode.getCharNode(wordArr[i]);
+        }
+
+        return currentNode;
     }
 
     toArray() {
@@ -65,9 +68,10 @@ export default class Trie {
         while(nodeChildren.getKeys().length > 0) {
             trieArray.push(...nodeChildren.getKeys());
         }
+        return trieArray;
     }
 
     toString() {
-
+        return this.toArray().join();
     }
 }

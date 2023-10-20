@@ -33,6 +33,10 @@ export default class TrieNode {
   getCharNode(char) {
     return this.childrens.get(char);
   }
+  
+  isChildrenPresent() {
+    return Boolean(this.toArray().length);
+  }
 
   hasSuggestions() {}
 
