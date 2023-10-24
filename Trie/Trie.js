@@ -21,12 +21,37 @@ export default class Trie {
     }
 
     deleteWord(word) {
-        const toBeDeletedWord = Array.from(word);
+        const toBeDeletedWordArr = Array.from(word);
         if(this.hasWordExist(word)) {
-            const lasCharNode = this.getLasCharacterNode(word);
-            if(!lasCharNode.isChildrenPresent()) {
+            const depthFirstDelete = (currentNode, index = 0) => {
+                if(index >= toBeDeletedWordArr.length) {
+                    return null;
+                }
+                
+                const char = toBeDeletedWordArr[index];
 
+                const childNode = currentNode.getChild(char);
+
+                if(!childNode) {
+                    return null;
+                }
+
+                index += 1;
+
+                depthFirstDelete(childNode, index);
+
+                if(index === (toBeDeletedWordArr.length - 1)) {
+                    childNode.isCompleteWord = false;
+                }
+
+                if(!childNode.isChildrenPresent()) {
+                    currentNode.removeChild(char);
+                }
             }
+
+            depthFirstDelete(this.root);
+            
+            return this;
         }
         return null;
     }
@@ -55,7 +80,7 @@ export default class Trie {
                 return null;
             }
 
-            currentNode = currentNode.getCharNode(wordArr[i]);
+            currentNode = currentNode.getChild(wordArr[i]);
         }
 
         return currentNode;

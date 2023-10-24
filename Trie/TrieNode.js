@@ -2,35 +2,44 @@ import { HashTable } from "../hash-table/HashTable";
 
 const characterCount = 26;
 export default class TrieNode {
-  constructor(character, isEndOfWord, data) {
+  constructor(character, isCompleteWord, data) {
     this.character = character;
-    this.isEndOfWord = isEndOfWord;
+    this.isCompleteWord = isCompleteWord;
     this.data = data;
     this.childrens = new HashTable(characterCount);
   }
 
-  addChild(char, isEndOfWord) {
+  addChild(char, isCompleteWord) {
     if (this.childrens.has(char)) {
       const node = this.getCharNode(char);
-      node.isEndOfWord = isEndOfWord;
+      node.isCompleteWord = isCompleteWord;
       return node;
     }
-    const node = new TrieNode(char, isEndOfWord);
+    const node = new TrieNode(char, isCompleteWord);
     this.childrens.set(char, node);
     return node;
   }
 
-  removeChild() {}
+  removeChild(char) {
+    const childNode = this.getChild(char);
+
+    if(childNode && !childNode.isEndOfWord() && !childNode.isChildrenPresent()) {
+      return this.childrens.delete(char);
+    }
+
+    return this;
+
+  }
 
   isEndOfWord() {
-    return this.isEndOfWord;
+    return this.isCompleteWord;
   }
 
   isChildExist(char) {
     return this.childrens.has(char);
   }
 
-  getCharNode(char) {
+  getChild(char) {
     return this.childrens.get(char);
   }
   
