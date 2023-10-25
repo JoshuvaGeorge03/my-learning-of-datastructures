@@ -47,12 +47,16 @@ export default class TrieNode {
     return Boolean(this.toArray().length);
   }
 
-  hasSuggestions() {}
+  hasSuggestions() {
+    return Boolean(this.getSuggestions().length);
+  }
 
-  getSuggestions() {}
+  getSuggestions() {
+    return this.toArray();
+  }
 
-  toString() {
-    return this.toArray().join();
+  toString(stringFunc) {
+    return stringFunc ? this.toArray().map(v => stringFunc(v)).toString() : this.toArray().toString();
   }
 
   toArray() {

@@ -61,8 +61,12 @@ export default class Trie {
         return Boolean(lasCharNode && lasCharNode.isEndOfWord());
     }
 
-    suggestNextCharacters() {
-
+    suggestNextCharacters(word) {
+        const lasCharNode = this.getLasCharacterNode(word);
+        if(lasCharNode) {
+            return lasCharNode.getSuggestions();
+        }
+        return [];
     }
 
     getLasCharacterNode(word){
@@ -90,13 +94,13 @@ export default class Trie {
         let nodeChildren = this.root.childrens;
         let i = 0;
         let trieArray = [];
-        while(nodeChildren.getKeys().length > 0) {
+        while(nodeChildren.toArray().length > 0) {
             trieArray.push(...nodeChildren.getKeys());
         }
         return trieArray;
     }
 
-    toString() {
-        return this.toArray().join();
+    toString(stringFunc) {
+        // return this.toArray().join();
     }
 }

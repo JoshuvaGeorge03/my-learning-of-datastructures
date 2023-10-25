@@ -187,6 +187,14 @@ operations ->
 4. decrease or increase key -> updating the key within a max or min heap
 5. meld -> creating a new heap with all the original elements by combining two existing heap to for and deleting the original heap.
 
+**Tree Traversal**
+
+Inorder Traversal -> travel to left node of root node then root node and then right node
+
+Pre-order Traversal -> Travel to root node then left and right node
+
+Post Order Traversal -> Travel to left node then right node and then to root node
+
 ### Priority Queue
 
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
@@ -313,7 +321,7 @@ Lineary Probing, Quadratic probing, double hashing all are subject to the issue 
 
 Open addressing techniques more senstive to the hashing function and probing sequence used, but separate chainig related techniques don't need to worry about that.
 
-1. Linear Probing
+1. **Linear Probing**
 
 It is basically Probing method, which uses linear formula to probe.
 
@@ -339,7 +347,7 @@ when we hit a max threshold value, we need to scale up the hash table, we usuall
 
 and then, we allocate new chunk of memory for new table, then we need to take content from old table to re-insert it again on the new table. and after re-insert key/value pari in the new table, throw away the old table.
 
-2. Quadratic Probing
+2. **Quadratic Probing**
 
 Like Lineary Probing, we are using quadratic probing to find offset value from keyhash.
 
@@ -360,7 +368,7 @@ If we hit a condition, where we need to re-arrange the tale size, before doing a
 
 when we are going to insert a key, we are going to check if the key is already present, then, we update the value of the key.
 
-3. Double Hashing
+3. **Double Hashing**
 
 Like other probing, when we hit collision, we use probing technique double hashing to find offset value for the keyhash and once we find the freeslot, we insert key/value pair.
 
