@@ -1,6 +1,7 @@
-export default function Button({ children, customClass, ...props }) {
+import React from 'react';
+
+export default function Button({ children, customClass, onClick, ...props }) {
   function handleClick(e) {
-    const { onClick } = props;
     return onClick?.(e);
   }
 
