@@ -90,6 +90,14 @@ export default class Trie {
         return currentNode;
     }
 
+    depthFirstTraversal(rootNode) {
+
+    }
+
+    breathFirstTraversal(rootNode) {
+        
+    }
+
     toArray() {
         let nodeChildren = this.root.childrens;
         let i = 0;

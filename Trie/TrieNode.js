@@ -52,7 +52,7 @@ export default class TrieNode {
   }
 
   getSuggestions() {
-    return this.toArray();
+    return this.childrens.getKeys();
   }
 
   toString(stringFunc) {

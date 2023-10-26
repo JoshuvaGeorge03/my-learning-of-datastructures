@@ -187,7 +187,7 @@ operations ->
 4. decrease or increase key -> updating the key within a max or min heap
 5. meld -> creating a new heap with all the original elements by combining two existing heap to for and deleting the original heap.
 
-**Tree Traversal**
+**Binary search Tree Traversal**
 
 Inorder Traversal -> travel to left node of root node then root node and then right node
 

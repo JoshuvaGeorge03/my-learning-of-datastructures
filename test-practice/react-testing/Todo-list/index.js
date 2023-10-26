@@ -2,9 +2,20 @@ import React from "react";
 import Container from "../components-lib/Container";
 import Button from "../components-lib/Button";
 import TextBox from "../components-lib/TextBox";
+import List from "../components-lib/List";
+
+const addAction = "addAction";
+
+function addActionCreator(data) {
+  return {
+    type: addAction,
+    data,
+  };
+}
 
 export default function TodoList({ initialTodos = [], needDefault = true }) {
-  const [todoList, dispatch] = React.useReducer(
+  
+  const [todoLists, dispatch] = React.useReducer(
     (prevState, action) => {
       console.log("prev state", prevState);
       if (action.type === addAction) {
@@ -17,18 +28,21 @@ export default function TodoList({ initialTodos = [], needDefault = true }) {
       needDefault ? initialTodos.push("joshuva") : initialTodos
   );
 
-  function addTodo(data) {
-    return dispatch(addActionCreator(data));
+
+  const [todoItemData, setTodoItemData] = React.useState('');
+
+  function addTodo() {
+    return dispatch(addActionCreator(todoItemData));
   }
 
   return (
     <React.Fragment>
       <Container>
-        <TextBox />
+        <TextBox onChange={setTodoItemData} value={todoItemData} />
         <Button onClick={addTodo}>Add</Button>
       </Container>
       <Container>
-        
+        <List lists={todoLists} />
       </Container>
     </React.Fragment>
   );
