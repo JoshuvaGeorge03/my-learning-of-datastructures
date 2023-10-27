@@ -31,6 +31,10 @@ export default class TrieNode {
 
   }
 
+  getValue() {
+    return this.character;
+  }
+
   isEndOfWord() {
     return this.isCompleteWord;
   }
@@ -49,6 +53,10 @@ export default class TrieNode {
 
   hasSuggestions() {
     return Boolean(this.getSuggestions().length);
+  }
+
+  getChildrenNodes() {
+    return this.childrens.getValues();
   }
 
   getSuggestions() {

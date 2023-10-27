@@ -1,4 +1,5 @@
 import { LinkedList } from '../linked-list/linked-list'
+import { doNothingExceptReturningPassedArgument } from '../utils/default-value-assignment';
 
 export class QueueNode {
     constructor(data, next) {
@@ -49,11 +50,11 @@ export class Queue { // FIFO (First In First Out)
         return this.head ? this.head.data : null;
     }
 
-    toArray() {
+    toArray(valueFormattterFunction = doNothingExceptReturningPassedArgument) {
         let currentNode = this.head;
         const queueNodes = [];
         while (currentNode) {
-            queueNodes.push(currentNode);
+            queueNodes.push(valueFormattterFunction(currentNode));
             currentNode = currentNode.next;
         }
         return queueNodes;
@@ -83,8 +84,8 @@ export class QueueWithLinkedList extends LinkedList {
         if(this.isEmpty()) return null;
         return this.head.data
     }
-    toArray() {
-        return super.toArray();
+    toArray(valueFormattterFunction = doNothingExceptReturningPassedArgument) {
+        return super.toArray(valueFormattterFunction);
     }
 
     toString() {

@@ -1,3 +1,4 @@
+import { Queue } from "../Queue/Queue";
 import TrieNode from "./TrieNode";
 
 const RootNodeChar = '$';
@@ -95,17 +96,18 @@ export default class Trie {
     }
 
     breathFirstTraversal(rootNode) {
-        
+        const nodesInQueue = new Queue();
+        const queueArr = [...this.root.getChildrenNodes()];
+        for(const queuedItem of queueArr) {
+            const currentNodeValue = queuedItem.getValue();
+            nodesInQueue.enqueue(currentNodeValue);
+            queueArr.push(...queuedItem.getChildrenNodes());
+        }
+        return nodesInQueue.toArray(node => node.data);
     }
 
     toArray() {
-        let nodeChildren = this.root.childrens;
-        let i = 0;
-        let trieArray = [];
-        while(nodeChildren.toArray().length > 0) {
-            trieArray.push(...nodeChildren.getKeys());
-        }
-        return trieArray;
+       return this.breathFirstTraversal(this.root);
     }
 
     toString(stringFunc) {
