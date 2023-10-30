@@ -17,4 +17,12 @@ describe('TodoListTesting', () => {
 
         expect(addButtonEl).toBeInTheDocument();
     });
+
+    test('whether list render with default data', () => {
+        render(<TodoList needDefault />);
+
+        const listEle = screen.getByText(/joshuva/);
+
+        expect(listEle.textContent).toBe('joshuva');
+    })
 });

@@ -13,7 +13,7 @@ function addActionCreator(data) {
   };
 }
 
-export default function TodoList({ initialTodos = [], needDefault = true }) {
+export default function TodoList({ initialTodos = [], needDefault = false }) {
   
   const [todoLists, dispatch] = React.useReducer(
     (prevState, action) => {
@@ -24,11 +24,13 @@ export default function TodoList({ initialTodos = [], needDefault = true }) {
       return prevState;
     },
     initialTodos,
-    (initialTodos) =>
-      needDefault ? initialTodos.push("joshuva") : initialTodos
+    (todos) => {
+      console.log('initial todo', todos)
+      return needDefault ? [...todos, 'joshuva'] : todos;
+    }
   );
 
-
+  console.log('todo', todoLists);
   const [todoItemData, setTodoItemData] = React.useState('');
 
   function addTodo() {
