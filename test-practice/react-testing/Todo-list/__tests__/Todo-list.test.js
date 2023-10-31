@@ -24,5 +24,19 @@ describe('TodoListTesting', () => {
         const listEle = screen.getByText(/joshuva/);
 
         expect(listEle.textContent).toBe('joshuva');
-    })
+    });
+
+    test('whether list render with initial set of data', () => {
+        
+        render(<TodoList initialTodos={['I am going to rocking', 'life goes on', 'finding clamness inside matters']} />);
+
+        const listElements = screen.getAllByTestId('listElements');
+
+        expect(listElements).toHaveLength(3);
+
+        const listEl = screen.getByText('life goes on');
+
+        expect(listEl).toHaveTextContent('life goes on');
+        expect(listEl).toBeInTheDocument();
+    });
 });

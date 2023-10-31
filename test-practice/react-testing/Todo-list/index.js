@@ -25,12 +25,10 @@ export default function TodoList({ initialTodos = [], needDefault = false }) {
     },
     initialTodos,
     (todos) => {
-      console.log('initial todo', todos)
       return needDefault ? [...todos, 'joshuva'] : todos;
     }
   );
 
-  console.log('todo', todoLists);
   const [todoItemData, setTodoItemData] = React.useState('');
 
   function addTodo() {
