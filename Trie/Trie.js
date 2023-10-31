@@ -1,116 +1,125 @@
 import { Queue } from "../Queue/Queue";
 import TrieNode from "./TrieNode";
 
-const RootNodeChar = '$';
+const RootNodeChar = "$";
 
 export default class Trie {
-    constructor() {
-        this.root = new TrieNode(RootNodeChar, false, null);
+  constructor() {
+    this.root = new TrieNode(RootNodeChar, false, null);
+  }
+
+  addWord(word) {
+    const wordLength = word.length;
+    let node = this.root;
+
+    for (let i = 0; i < wordLength; i++) {
+      const characterOfAWord = word[i];
+      const isEndOfWord = i + 1 === wordLength;
+      node = node.addChild(characterOfAWord, isEndOfWord);
     }
 
-    addWord(word) {
-        const wordLength = word.length;
-        let node = this.root;
+    return this;
+  }
 
-        for(let i = 0; i < wordLength; i++) {
-            const characterOfAWord = word[i];
-            const isEndOfWord = i + 1 === wordLength;
-            node = node.addChild(characterOfAWord, isEndOfWord);
+  deleteWord(word) {
+    const toBeDeletedWordArr = Array.from(word);
+    if (this.hasWordExist(word)) {
+      const depthFirstDelete = (currentNode, index = 0) => {
+        if (index >= toBeDeletedWordArr.length) {
+          return null;
         }
 
-        return this;
+        const char = toBeDeletedWordArr[index];
+
+        const childNode = currentNode.getChild(char);
+
+        if (!childNode) {
+          return null;
+        }
+
+        index += 1;
+
+        depthFirstDelete(childNode, index);
+
+        if (index === toBeDeletedWordArr.length - 1) {
+          childNode.isCompleteWord = false;
+        }
+
+        if (!childNode.isChildrenPresent()) {
+          currentNode.removeChild(char);
+        }
+      };
+
+      depthFirstDelete(this.root);
+
+      return this;
+    }
+    return null;
+  }
+
+  hasWordExist(word) {
+    const lasCharNode = this.getLasCharacterNode(word);
+    return Boolean(lasCharNode && lasCharNode.isEndOfWord());
+  }
+
+  suggestNextCharacters(word) {
+    const lasCharNode = this.getLasCharacterNode(word);
+    if (lasCharNode) {
+      return lasCharNode.getSuggestions();
+    }
+    return [];
+  }
+
+  getLasCharacterNode(word) {
+    const wordArr = Array.from(word);
+
+    if (!wordArr.length) {
+      return null;
     }
 
-    deleteWord(word) {
-        const toBeDeletedWordArr = Array.from(word);
-        if(this.hasWordExist(word)) {
-            const depthFirstDelete = (currentNode, index = 0) => {
-                if(index >= toBeDeletedWordArr.length) {
-                    return null;
-                }
-                
-                const char = toBeDeletedWordArr[index];
+    let currentNode = this.root;
+    let wordArrLength = wordArr.length;
 
-                const childNode = currentNode.getChild(char);
-
-                if(!childNode) {
-                    return null;
-                }
-
-                index += 1;
-
-                depthFirstDelete(childNode, index);
-
-                if(index === (toBeDeletedWordArr.length - 1)) {
-                    childNode.isCompleteWord = false;
-                }
-
-                if(!childNode.isChildrenPresent()) {
-                    currentNode.removeChild(char);
-                }
-            }
-
-            depthFirstDelete(this.root);
-            
-            return this;
-        }
+    for (let i = 0; i < wordArrLength; i++) {
+      if (!currentNode.isChildExist(wordArr[i])) {
         return null;
+      }
+
+      currentNode = currentNode.getChild(wordArr[i]);
     }
 
-    hasWordExist(word) {
-        const lasCharNode = this.getLasCharacterNode(word);
-        return Boolean(lasCharNode && lasCharNode.isEndOfWord());
+    return currentNode;
+  }
+
+  depthFirstTraversal(rootNode, set = []) {
+    set.push(rootNode.getValue());
+    const childNodes = rootNode.getChildrenNodes();
+    if (!childNodes.length) {
+      return null;
     }
-
-    suggestNextCharacters(word) {
-        const lasCharNode = this.getLasCharacterNode(word);
-        if(lasCharNode) {
-            return lasCharNode.getSuggestions();
-        }
-        return [];
+    for (const childNode of childNodes) {
+      this.depthFirstTraversal(childNode, set);
     }
+    return set;
+  }
 
-    getLasCharacterNode(word){
-        const wordArr = Array.from(word);
-
-        if(!wordArr.length) {
-            return null
-        }
-
-        let currentNode = this.root;
-        let wordArrLength = wordArr.length;
-
-        for(let i = 0; i < wordArrLength; i++) {
-            if(!currentNode.isChildExist(wordArr[i])) {
-                return null;
-            }
-
-            currentNode = currentNode.getChild(wordArr[i]);
-        }
-
-        return currentNode;
+  breathFirstTraversal(rootNode) {
+    const nodesInQueue = new Queue();
+    nodesInQueue.enqueue(rootNode.getValue());
+    const queueArr = [...rootNode.getChildrenNodes()];
+    for (const queuedItem of queueArr) {
+      const currentNodeValue = queuedItem.getValue();
+      nodesInQueue.enqueue(currentNodeValue);
+      queueArr.push(...queuedItem.getChildrenNodes());
     }
+    return nodesInQueue.toArray((node) => node.data);
+  }
 
-    depthFirstTraversal(rootNode) {
+  toArray(typeOfTravesalMode = 'breath') {
+    return typeOfTravesalMode === 'breath' ? this.breathFirstTraversal(this.root) : this.depthFirstTraversal(this.root);
+  }
 
-    }
-
-    breathFirstTraversal(rootNode) {
-        const nodesInQueue = new Queue();
-        const queueArr = [...this.root.getChildrenNodes()];
-        for(const queuedItem of queueArr) {
-            const currentNodeValue = queuedItem.getValue();
-            nodesInQueue.enqueue(currentNodeValue);
-            queueArr.push(...queuedItem.getChildrenNodes());
-        }
-        return nodesInQueue.toArray(node => node.data);
-    }
-
-    toArray() {
-       return this.breathFirstTraversal(this.root);
-    }
-
-    toString(stringFunc) {
-        // return this.toArray().join();
-    }
+  toString(stringFunc) {
+    // return this.toArray().join();
+  }
 }
