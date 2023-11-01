@@ -39,4 +39,20 @@ describe('TodoListTesting', () => {
         expect(listEl).toHaveTextContent('life goes on');
         expect(listEl).toBeInTheDocument();
     });
+
+    test('whether list render with default value and with initial set of data', () => {
+
+        render(<TodoList initialTodos={['I am rocking', 'what what']} needDefault />)
+
+
+        const listElements = screen.getAllByTestId('listElements');
+        expect(listElements).toHaveLength(3);
+
+        const defaultListEl = screen.getByText(/joshuva/);
+        expect(defaultListEl).toBeInTheDocument();
+
+        const initialListEl = screen.getByText(/I am rocking/);
+        expect(initialListEl).toBeInTheDocument();
+
+    });
 });
