@@ -115,8 +115,8 @@ export default class Trie {
     return nodesInQueue.toArray((node) => node.data);
   }
 
-  toArray(typeOfTravesalMode = 'breath') {
-    return typeOfTravesalMode === 'breath' ? this.breathFirstTraversal(this.root) : this.depthFirstTraversal(this.root);
+  toArray(typeOfTravesalMode = 'depth') {
+    return typeOfTravesalMode === 'depth' ? this.depthFirstTraversal(this.root) : this.breathFirstTraversal(this.root);
   }
 
   toString(stringFunc) {
