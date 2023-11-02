@@ -120,6 +120,6 @@ export default class Trie {
   }
 
   toString(stringFunc) {
-    // return this.toArray().join();
+    return this.toArray().map(v => stringFunc(v)).toString();
   }
 }

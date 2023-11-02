@@ -55,4 +55,13 @@ describe('TodoListTesting', () => {
         expect(initialListEl).toBeInTheDocument();
 
     });
+
+    test('whether list elements adding correctly', () => {
+        
+        render(<TodoList />);
+
+        const inputEle = screen.getByTestId('todoListInput');
+        
+
+    });
 });

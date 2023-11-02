@@ -1,6 +1,11 @@
 import Trie from "../Trie";
 
 describe('Trie Data structure Testing', () => {
+
+    function makeTheStringIntoArray(str, splitChar = '') {
+        return str.split(splitChar);
+    } 
+
     test('whether the trie adding word correctly', () => {
         
         const trie = new Trie();
@@ -13,5 +18,19 @@ describe('Trie Data structure Testing', () => {
         
         expect(trie.toArray()).toEqual('$jokerscount'.split(''));
 
+        expect(trie.addWord('jokers').toArray()).toEqual(makeTheStringIntoArray('$jokersscount'));
+
+        trie.addWord('emy');
+
+        expect(trie.toArray()).toEqual(makeTheStringIntoArray('$jokersscountemy'));
+
+        trie.addWord('emila');
+
+        expect(trie.toArray()).toEqual(makeTheStringIntoArray('$jokersscountemilay'));
+
+    });
+
+    test('whether the word deletion work in trie correctly', () => {
+        
     });
 });

@@ -6,5 +6,5 @@ export default function TextBox({ customClass, type = "text", onChange, value,  
     onChange?.(e.target.value);
   }
 
-  return <input onChange={handleChange} value={value} type={type} className={`${customClass}`} {...props} />;
+  return <input data-testid="todoListInput" onChange={handleChange} value={value} type={type} className={`${customClass}`} {...props} />;
 }
