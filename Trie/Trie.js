@@ -1,7 +1,7 @@
 import { Queue } from "../Queue/Queue";
 import TrieNode from "./TrieNode";
 
-const RootNodeChar = "$";
+export const RootNodeChar = "$";
 
 export default class Trie {
   constructor() {
@@ -24,29 +24,26 @@ export default class Trie {
   deleteWord(word) {
     const toBeDeletedWordArr = Array.from(word);
     if (this.hasWordExist(word)) {
-      const depthFirstDelete = (currentNode, index = 0) => {
+      const depthFirstDelete = (parentNode, index = 0) => {
         if (index >= toBeDeletedWordArr.length) {
           return null;
         }
 
         const char = toBeDeletedWordArr[index];
 
-        const childNode = currentNode.getChild(char);
+        const childNode = parentNode.getChild(char);
 
         if (!childNode) {
           return null;
         }
-
-        index += 1;
-
-        depthFirstDelete(childNode, index);
-
+        let newIndex = index + 1
+        depthFirstDelete(childNode, newIndex);
         if (index === toBeDeletedWordArr.length - 1) {
           childNode.isCompleteWord = false;
         }
-
+        
         if (!childNode.isChildrenPresent()) {
-          currentNode.removeChild(char);
+          parentNode.removeChild(char);
         }
       };
 
@@ -95,7 +92,7 @@ export default class Trie {
     set.push(rootNode.getValue());
     const childNodes = rootNode.getChildrenNodes();
     if (!childNodes.length) {
-      return null;
+      return set;
     }
     for (const childNode of childNodes) {
       this.depthFirstTraversal(childNode, set);

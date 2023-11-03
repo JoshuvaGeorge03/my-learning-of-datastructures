@@ -6,6 +6,10 @@ describe('Trie Data structure Testing', () => {
         return str.split(splitChar);
     } 
 
+    function removeRootNodeFromStringAndMakeItArray(str) {
+        return makeTheStringIntoArray(str.slice(1));
+    }
+
     test('whether the trie adding word correctly', () => {
         
         const trie = new Trie();
@@ -31,6 +35,11 @@ describe('Trie Data structure Testing', () => {
     });
 
     test('whether the word deletion work in trie correctly', () => {
-        
+        const trie = new Trie();
+        expect(trie.deleteWord('jos')).toBe(null);
+
+        trie.addWord('joshuva');
+        expect(trie.deleteWord('jos')).toBe(null);
+        expect(trie.deleteWord('joshuva').toArray()).toEqual(['$']);
     });
 });

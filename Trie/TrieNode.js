@@ -22,7 +22,6 @@ export default class TrieNode {
 
   removeChild(char) {
     const childNode = this.getChild(char);
-
     if(childNode && !childNode.isEndOfWord() && !childNode.isChildrenPresent()) {
       return this.childrens.delete(char);
     }
