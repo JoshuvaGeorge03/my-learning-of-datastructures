@@ -56,12 +56,22 @@ describe('TodoListTesting', () => {
 
     });
 
-    test('whether list elements adding correctly', () => {
+    test('whether list elements adding correctly', async () => {
         
         render(<TodoList />);
 
         const inputEle = screen.getByTestId('todoListInput');
+        await userEvent.type(inputEle, 'I want to be cool');
+        expect(inputEle).toHaveDisplayValue('I want to be cool');
+
+        const buttonEl = screen.getByText(/add/i);
+        await userEvent.click(buttonEl);
         
+        const listEl = screen.getByText('I want to be cool');
+        expect(listEl).toBeInTheDocument();
+
+        expect(inputEle).toHaveDisplayValue('');
 
     });
+
 });
