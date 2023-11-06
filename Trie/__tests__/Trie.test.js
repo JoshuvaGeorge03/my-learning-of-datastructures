@@ -41,5 +41,17 @@ describe('Trie Data structure Testing', () => {
         trie.addWord('joshuva');
         expect(trie.deleteWord('jos')).toBe(null);
         expect(trie.deleteWord('joshuva').toArray()).toEqual(['$']);
+        trie.addWord('joker').addWord('count').addWord('cool').addWord('why').addWord('where').addWord('wheat');
+        expect(trie.deleteWord('do')).toBe(null);
+        expect(trie.deleteWord('joke')).toBe(null);
+        expect(trie.toArray()).toEqual(makeTheStringIntoArray('$jokerwhyereatcoolunt'));
+        expect(trie.deleteWord('joker').toArray()).toEqual(makeTheStringIntoArray('$whyereatcoolunt'));
+        expect(trie.deleteWord('cool').toArray()).toEqual(makeTheStringIntoArray('$whyereatcount'));
+        expect(trie.deleteWord('wheat').toArray()).toEqual(makeTheStringIntoArray('$whyerecount'));
     });
+
+    test('whether the word suggestion works well', () => {
+
+    });
+
 });
