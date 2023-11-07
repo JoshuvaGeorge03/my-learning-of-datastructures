@@ -33,8 +33,7 @@ export default function TodoList({ initialTodos = [], needDefault = false }) {
 
   function addTodo() {
     setTodoItemData('');
-    return dispatch(addActionCreator(todoItemData));
-    
+    return dispatch(addActionCreator(todoItemData)); 
   }
 
   return (

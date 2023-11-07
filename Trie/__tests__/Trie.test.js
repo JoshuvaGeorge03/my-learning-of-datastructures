@@ -51,7 +51,13 @@ describe('Trie Data structure Testing', () => {
     });
 
     test('whether the word suggestion works well', () => {
-
+        const trie = new Trie();
+        expect(trie.suggestNextCharacters('jos')).toEqual([]);
+        trie.addWord('word');
+        expect(trie.suggestNextCharacters('jos')).toEqual([]);
+        expect(trie.suggestNextCharacters('word')).toEqual([]);
+        expect(trie.suggestNextCharacters('wor')).toEqual(['d']);
+        expect(trie.suggestNextCharacters('w')).toEqual(makeTheStringIntoArray('o'));
     });
 
 });
