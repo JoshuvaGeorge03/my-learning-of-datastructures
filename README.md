@@ -427,3 +427,11 @@ if we want space optimizations, we can implement it using compact prefix tree.
 each node in the tree contains, whether it is endofword(bool) and data(if it is end of word) and link to next children in the tree;
 
 it can be used for autocomplete implementations.
+
+### Tree 
+
+It is a Abstract Data Type, which simulates a hierarchial data structure. and consists of root node and subtrees of children with parent nodes.
+
+And DS implement this abstract data type also named tree.
+
+Basically, it is defined as collection of nodes and start with root node. and each node consist of value and set of references to children nodes with the constraints no references should be duplicated and no reference should point upwards. 

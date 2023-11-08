@@ -60,4 +60,15 @@ describe('Trie Data structure Testing', () => {
         expect(trie.suggestNextCharacters('w')).toEqual(makeTheStringIntoArray('o'));
     });
 
+    test('wther the word exist or not check works correctly', () => {
+        const trie = new Trie();
+        expect(trie.hasWordExist('what')).toBe(false);
+        expect(trie.hasWordExist('w')).toBe(false);
+        trie.addWord('jos');
+        expect(trie.hasWordExist('w')).toBe(false);
+        expect(trie.hasWordExist('word')).toBe(false);
+        expect(trie.hasWordExist('jo')).toBe(false);
+        expect(trie.hasWordExist('jos')).toBe(true);
+    });
+
 });
