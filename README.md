@@ -435,3 +435,9 @@ It is a Abstract Data Type, which simulates a hierarchial data structure. and co
 And DS implement this abstract data type also named tree.
 
 Basically, it is defined as collection of nodes and start with root node. and each node consist of value and set of references to children nodes with the constraints no references should be duplicated and no reference should point upwards. 
+
+it consist of  top most of the tree called root node and parent node and and child node and each child node has it's own child node and they has their own, hence forming recursive data structure.
+
+collection of nodes connected by edges(references) and forming hierarchial relationships
+
+It is non-linear data structure, so we can easily find and extract values in better time complexity than linear data structure.
