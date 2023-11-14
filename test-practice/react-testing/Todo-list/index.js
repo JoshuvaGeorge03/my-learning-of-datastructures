@@ -5,6 +5,7 @@ import TextBox from "../components-lib/TextBox";
 import List from "../components-lib/List";
 
 const addAction = "addAction";
+const removeAction = "removeAction";
 
 function addActionCreator(data) {
   return {
@@ -13,27 +14,39 @@ function addActionCreator(data) {
   };
 }
 
+function removeActionCreator(data) {
+  return {
+    type: removeAction,
+    data,
+  };
+}
+
 export default function TodoList({ initialTodos = [], needDefault = false }) {
-  
   const [todoLists, dispatch] = React.useReducer(
     (prevState, action) => {
-      console.log("prev state", prevState);
       if (action.type === addAction) {
         return [...prevState, action.data];
+      }
+      if(action.type === removeAction) {
+        return prevState.filter(todoList => todoList !== action.data);
       }
       return prevState;
     },
     initialTodos,
     (todos) => {
-      return needDefault ? [...todos, 'joshuva'] : todos;
+      return needDefault ? [...todos, "joshuva"] : todos;
     }
   );
 
-  const [todoItemData, setTodoItemData] = React.useState('');
+  const [todoItemData, setTodoItemData] = React.useState("");
 
   function addTodo() {
-    setTodoItemData('');
-    return dispatch(addActionCreator(todoItemData)); 
+    setTodoItemData("");
+    return dispatch(addActionCreator(todoItemData));
+  }
+
+  function removeTodo(list) {
+    return dispatch(removeActionCreator(list));
   }
 
   return (
@@ -43,7 +56,7 @@ export default function TodoList({ initialTodos = [], needDefault = false }) {
         <Button onClick={addTodo}>Add</Button>
       </Container>
       <Container>
-        <List lists={todoLists} />
+        <List lists={todoLists} handleTaskFinish={removeTodo} />
       </Container>
     </React.Fragment>
   );

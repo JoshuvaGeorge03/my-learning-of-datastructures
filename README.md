@@ -441,3 +441,4 @@ it consist of  top most of the tree called root node and parent node and and chi
 collection of nodes connected by edges(references) and forming hierarchial relationships
 
 It is non-linear data structure, so we can easily find and extract values in better time complexity than linear data structure.
+

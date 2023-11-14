@@ -32,6 +32,7 @@ By default, jsdom will be used as mock testing environment, which replicate brow
 + Arrange - render the component
 + Act - take the component by query similar to how the user will do it, and do some interaction
 + Assert - assert your expectation with actual output.
+![structure of tests](assets/testblock.png)
 
 ## Why choose React Testing library?
 
@@ -46,7 +47,7 @@ By default, jsdom will be used as mock testing environment, which replicate brow
 + queryall - return array with elements if matches found or return empty array, sync
 + find - error out if no matches found, error out if more than one match found, async...    
 + findall - error out if no matches found, return arrary if one match or more than one match found, async
-![Alt text](querymethods.png)
+![Query methods](assets/querymethods.png)
 
 ## Methods to use in React testing lib
-![Query methods to use for during testing react component](querymethodstouse.png)
+![Query methods to use for during testing react component](assets/querymethodstouse.png)
