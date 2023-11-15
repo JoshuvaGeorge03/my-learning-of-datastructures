@@ -440,5 +440,23 @@ it consist of  top most of the tree called root node and parent node and and chi
 
 collection of nodes connected by edges(references) and forming hierarchial relationships
 
-It is non-linear data structure, so we can easily find and extract values in better time complexity than linear data structure.
+It is non-linear data structure, so we can easily find and extract values in better time complexity than linear data structure. In linear DS, time complexity increases, as data size increases and With non-linear DS, it is more balanced.
 
+**Terminalogies of Tree**
+Node - entity contains value and list of references to other nodes
+edge - link connecting two nodes.
+root node - node that has no parent or parent of every nodes
+parent node - node which contain other node
+child node - descendant of other node.
+leaf node - node that don't have any child
+degree of node - which indicate, how may child the node have
+level nodes - root node is level 0 and their child is on level 1 and so on.
+height of node - number of edges connected b/w leaf node and particular node in the longest path
+depth of node - number of edges connected b/w root node and particular node.
+
+**Traversing Tree**
+If we want to go to specific part of the tree and perform some operation, then we have do traverse to do that.
+
++ Pre-order - visit root node & then visit all nodes from left side & then visit all nodes from right side.
++ In order - visit all node from left side & visit root node & visit all nodes from right side.
++ Post order - visit all nodes from left side & vist all nodes from right side & visit root node.

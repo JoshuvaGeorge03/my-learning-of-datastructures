@@ -18,7 +18,9 @@ function ListItem({ list, handleTaskFinish }) {
     handleTaskFinish?.(list);
   }
 
-  return <Container data-testid="listElements" id={list}>{list}
-    <Button onClick={removeTodo}>Finished</Button>
-  </Container>;
+  return <React.Fragment>
+    <Container data-testid="listElements" id={list}>{list}
+  </Container>
+  <Button onClick={removeTodo}>Finished</Button>
+  </React.Fragment>;
 }

@@ -74,4 +74,21 @@ describe('TodoListTesting', () => {
 
     });
 
+    test('whether list elements added have finished mark button', async () => {
+        render(<TodoList />);
+
+        const inputEle = screen.getByRole('textbox');
+        await userEvent.type(inputEle, 'cool jos');
+        
+        const buttonEle = screen.getByText(/add/i);
+        await userEvent.click(buttonEle);
+
+        const listEl = screen.getByText(/cool jos/);
+        expect(listEl).toBeInTheDocument();
+
+        const deleteButtonEls = screen.getAllByText(/Finished/);
+        expect(deleteButtonEls).toHaveLength(1);
+        deleteButtonEls.forEach(deleteEle => expect(deleteEle).toBeInTheDocument());
+    });
+
 });
