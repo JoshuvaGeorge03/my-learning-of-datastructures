@@ -91,4 +91,23 @@ describe('TodoListTesting', () => {
         deleteButtonEls.forEach(deleteEle => expect(deleteEle).toBeInTheDocument());
     });
 
+    test('whether list elements are deleted', async () =>{
+
+        render(<TodoList />);
+
+        const inputEl = screen.getByRole('textbox');
+        await userEvent.type(inputEl, 'joshuva will have a lot of people\'s');
+
+        const buttonEle = screen.getByText(/add/i);
+        await userEvent.click(buttonEle);
+
+        const listEl = screen.getByText(/joshuva will have a lot of people's/);
+
+        const deleteButtonEl = screen.getByText(/Finished/);
+        await userEvent.click(deleteButtonEl);
+
+        expect(listEl).not.toBeInTheDocument();
+
+    });
+
 });
