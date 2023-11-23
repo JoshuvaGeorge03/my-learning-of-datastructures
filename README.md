@@ -187,14 +187,6 @@ operations ->
 4. decrease or increase key -> updating the key within a max or min heap
 5. meld -> creating a new heap with all the original elements by combining two existing heap to for and deleting the original heap.
 
-**Binary search Tree Traversal**
-
-Inorder Traversal -> travel to left node of root node then root node and then right node
-
-Pre-order Traversal -> Travel to root node then left and right node
-
-Post Order Traversal -> Travel to left node then right node and then to root node
-
 ### Priority Queue
 
 -> Priority queue is a abstract data type(which means, it can done using any data structure and it only defines the interface, not actual implemenation)
@@ -440,14 +432,16 @@ it consist of  top most of the tree called root node and parent node and and chi
 
 collection of nodes connected by edges(references) and forming hierarchial relationships
 
+It is a un-directed graph, acyclically connected graph and two nodes/vertices in the tree are connected by one edge/path. also if we have N nodes, then we have N-1 edges.
+
 It is non-linear data structure, so we can easily find and extract values in better time complexity than linear data structure. In linear DS, time complexity increases, as data size increases and With non-linear DS, it is more balanced.
 
 **Terminalogies of Tree**
 Node - entity contains value and list of references to other nodes
 edge - link connecting two nodes.
 root node - node that has no parent or parent of every nodes
-parent node - node which contain other node
-child node - descendant of other node.
+parent node - node which contain other node, parent node of the root node usually null, but it can be sometimes the same root node, for ex: unix file system root folder parent is root folder.
+child node - descendant of other node. or extends from other node
 leaf node - node that don't have any child
 degree of node - which indicate, how may child the node have
 level nodes - root node is level 0 and their child is on level 1 and so on.
@@ -460,3 +454,22 @@ If we want to go to specific part of the tree and perform some operation, then w
 + Pre-order - visit root node & then visit all nodes from left side & then visit all nodes from right side.
 + In order - visit all node from left side & visit root node & visit all nodes from right side.
 + Post order - visit all nodes from left side & vist all nodes from right side & visit root node.
+
+**Binary Tree**
++ It is a tree with utmost 2 children.
+
+**Binary Search Tree**
+
+It is a Binary Tree which satisfies the BST invariant.
+
+BST invariant - left subtree has smaller elements then the value of the current node. and right subtree has larger elements than the current node.
+
+We need to put comparable data inside of binary search tree to maintain the BST invariant.z
+
+**Binary search Tree Traversal**
+
+Inorder Traversal -> travel to left node of root node then root node and then right node
+
+Pre-order Traversal -> Travel to root node then left and right node
+
+Post Order Traversal -> Travel to left node then right node and then to root node

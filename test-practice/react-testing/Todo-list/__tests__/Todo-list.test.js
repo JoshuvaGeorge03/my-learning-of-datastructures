@@ -3,111 +3,141 @@
  */
 
 import React from "react";
-import { screen, render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
+import { screen, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import "@testing-library/jest-dom";
 import TodoList from "..";
 
-describe('TodoListTesting', () => {
-    test('whether todolist rendered correctly', () => {
-        
-        render(<TodoList />);
+describe("TodoListTesting", () => {
+  test("whether todolist rendered correctly", () => {
+    render(<TodoList />);
 
-        const addButtonEl = screen.getByText(/Add/i);
+    const addButtonEl = screen.getByText(/Add/i);
 
-        expect(addButtonEl).toBeInTheDocument();
-    });
+    expect(addButtonEl).toBeInTheDocument();
+  });
 
-    test('whether list render with default data', () => {
-        render(<TodoList needDefault />);
+  test("whether list render with default data", () => {
+    render(<TodoList needDefault />);
 
-        const listEle = screen.getByText(/joshuva/);
+    const listEle = screen.getByText(/joshuva/);
 
-        expect(listEle.textContent).toBe('joshuva');
-    });
+    expect(listEle.textContent).toBe("joshuva");
+  });
 
-    test('whether list render with initial set of data', () => {
-        
-        render(<TodoList initialTodos={['I am going to rocking', 'life goes on', 'finding clamness inside matters']} />);
+  test("whether list render with initial set of data", () => {
+    render(
+      <TodoList
+        initialTodos={[
+          "I am going to rocking",
+          "life goes on",
+          "finding clamness inside matters",
+        ]}
+      />
+    );
 
-        const listElements = screen.getAllByTestId('listElements');
+    const listElements = screen.getAllByTestId("listElements");
 
-        expect(listElements).toHaveLength(3);
+    expect(listElements).toHaveLength(3);
 
-        const listEl = screen.getByText('life goes on');
+    const listEl = screen.getByText("life goes on");
 
-        expect(listEl).toHaveTextContent('life goes on');
-        expect(listEl).toBeInTheDocument();
-    });
+    expect(listEl).toHaveTextContent("life goes on");
+    expect(listEl).toBeInTheDocument();
+  });
 
-    test('whether list render with default value and with initial set of data', () => {
+  test("whether list render with default value and with initial set of data", () => {
+    render(
+      <TodoList initialTodos={["I am rocking", "what what"]} needDefault />
+    );
 
-        render(<TodoList initialTodos={['I am rocking', 'what what']} needDefault />)
+    const listElements = screen.getAllByTestId("listElements");
+    expect(listElements).toHaveLength(3);
 
+    const defaultListEl = screen.getByText(/joshuva/);
+    expect(defaultListEl).toBeInTheDocument();
 
-        const listElements = screen.getAllByTestId('listElements');
-        expect(listElements).toHaveLength(3);
+    const initialListEl = screen.getByText(/I am rocking/);
+    expect(initialListEl).toBeInTheDocument();
+  });
 
-        const defaultListEl = screen.getByText(/joshuva/);
-        expect(defaultListEl).toBeInTheDocument();
+  test("whether list elements adding correctly", async () => {
+    render(<TodoList />);
 
-        const initialListEl = screen.getByText(/I am rocking/);
-        expect(initialListEl).toBeInTheDocument();
+    const inputEle = screen.getByTestId("todoListInput");
+    await userEvent.type(inputEle, "I want to be cool");
+    expect(inputEle).toHaveDisplayValue("I want to be cool");
 
-    });
+    const buttonEl = screen.getByText(/add/i);
+    await userEvent.click(buttonEl);
 
-    test('whether list elements adding correctly', async () => {
-        
-        render(<TodoList />);
+    const listEl = screen.getByText("I want to be cool");
+    expect(listEl).toBeInTheDocument();
 
-        const inputEle = screen.getByTestId('todoListInput');
-        await userEvent.type(inputEle, 'I want to be cool');
-        expect(inputEle).toHaveDisplayValue('I want to be cool');
+    expect(inputEle).toHaveDisplayValue("");
+  });
 
-        const buttonEl = screen.getByText(/add/i);
-        await userEvent.click(buttonEl);
-        
-        const listEl = screen.getByText('I want to be cool');
-        expect(listEl).toBeInTheDocument();
+  test("whether list elements added have finished mark button", async () => {
+    render(<TodoList />);
 
-        expect(inputEle).toHaveDisplayValue('');
+    const inputEle = screen.getByRole("textbox");
+    await userEvent.type(inputEle, "cool jos");
 
-    });
+    const buttonEle = screen.getByText(/add/i);
+    await userEvent.click(buttonEle);
 
-    test('whether list elements added have finished mark button', async () => {
-        render(<TodoList />);
+    const listEl = screen.getByText(/cool jos/);
+    expect(listEl).toBeInTheDocument();
 
-        const inputEle = screen.getByRole('textbox');
-        await userEvent.type(inputEle, 'cool jos');
-        
-        const buttonEle = screen.getByText(/add/i);
-        await userEvent.click(buttonEle);
+    const deleteButtonEls = screen.getAllByText(/Finished/);
+    expect(deleteButtonEls).toHaveLength(1);
+    deleteButtonEls.forEach((deleteEle) =>
+      expect(deleteEle).toBeInTheDocument()
+    );
+  });
 
-        const listEl = screen.getByText(/cool jos/);
-        expect(listEl).toBeInTheDocument();
+  test("whether list elements are deleted", async () => {
+    render(<TodoList />);
 
-        const deleteButtonEls = screen.getAllByText(/Finished/);
-        expect(deleteButtonEls).toHaveLength(1);
-        deleteButtonEls.forEach(deleteEle => expect(deleteEle).toBeInTheDocument());
-    });
+    const inputEl = screen.getByRole("textbox");
+    await userEvent.type(inputEl, "joshuva will have a lot of people's");
 
-    test('whether list elements are deleted', async () =>{
+    const buttonEle = screen.getByText(/add/i);
+    await userEvent.click(buttonEle);
 
-        render(<TodoList />);
+    const listEl = screen.getByText(/joshuva will have a lot of people's/);
 
-        const inputEl = screen.getByRole('textbox');
-        await userEvent.type(inputEl, 'joshuva will have a lot of people\'s');
+    const deleteButtonEl = screen.getByText(/Finished/);
+    await userEvent.click(deleteButtonEl);
 
-        const buttonEle = screen.getByText(/add/i);
-        await userEvent.click(buttonEle);
+    expect(listEl).not.toBeInTheDocument();
+  });
 
-        const listEl = screen.getByText(/joshuva will have a lot of people's/);
+  test("whether list elements are modified", async () => {
+    render(<TodoList />);
 
-        const deleteButtonEl = screen.getByText(/Finished/);
-        await userEvent.click(deleteButtonEl);
+    const inputEl = screen.getByRole("textbox");
+    await userEvent.type(inputEl, "joshuva don't be scared");
 
-        expect(listEl).not.toBeInTheDocument();
+    const buttonEle = screen.getByText(/add/i);
+    await userEvent.click(buttonEle);
 
-    });
+    const listEl = screen.getByText(/joshuva don't be scared/);
+    expect(listEl).toBeInTheDocument();
 
+    await userEvent.click(listEl);
+
+    const editInputEl = screen.getByTestId("editMe");
+    expect(editInputEl).toBeInTheDocument();
+    expect(editInputEl).toBeVisible();
+    
+    await userEvent.type(editInputEl, "joshuva is strong");
+
+    const editButtonEl = screen.getByRole("button", { name: /Edit Me/ });
+    await userEvent.click(editButtonEl);
+
+    const newListEl = screen.getByText(/joshuva don't be scared/);
+
+    expect(newListEl.textContent).toBe("joshuva don't be scaredjoshuva is strong");
+  });
 });
