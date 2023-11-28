@@ -468,8 +468,10 @@ We need to put comparable data inside of binary search tree to maintain the BST 
 
 **Binary search Tree Traversal**
 
-Inorder Traversal -> travel to left node of root node then root node and then right node
+Inorder Traversal -> travel to left node of root node then root node and then right node (traverse the left subtree and then print the value of a node and then traverse the right subtree)
 
-Pre-order Traversal -> Travel to root node then left and right node
+Pre-order Traversal -> Travel to root node then left and right node (prints the value of the current node, then traverse to the left subtree and then the right subtree)
 
-Post Order Traversal -> Travel to left node then right node and then to root node
+Post Order Traversal -> Travel to left node then right node and then to root node (Traverse the left subtree followed by the right subtree then print the value of a node);
+
+level order traversal -> we want to print nodes as they appear one layer at a time
