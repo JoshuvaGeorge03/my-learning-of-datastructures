@@ -41,23 +41,49 @@ function ColorProvider({ children }) {
   );
 }
 
+function rgbToHex([red = 0, green = 0, blue = 0] = []) {
+  // Left shift (<<)  operator for color conversion is interesting
+  // the color value for each component of an RGB color is between 0 - 255 (8bits)
+  // The first 8 bits starting from the right will represent the blue component,
+  // the next 8 bits will represent the green component, and the 8 bits after that will represent the red component
+  return `#${((red << 16) | (green << 8) | blue).toString(16)}`;
+}
+function hexToRgb(hex) {
+  // working through above shift operator procedure backwards
+  // we will right-shift the color bits by multiples of 8 as necessary until
+  // we get the target component bits as the first 8 bits from the right
+  hex = hex.replace(/^#?([0-9a-f]{6})$/i, "$1");
+  hex = Number(`0x${hex}`);
+  // we need a way to mask out every other bits except the first 8 bits.
+  // & operator can be used to ensure that certain bits are turned off.
+  return [
+    (hex >> 16) & 0xff, // red
+    (hex >> 8) & 0xff, // green
+    hex & 0xff, // blue
+  ];
+}
+
 function ErrorComponent({ children }) {
   return <span style={{ color: "red", fontSize: ".75rem" }}>{children}</span>;
 }
 
 function TextInput({ value, handleChange }) {
-  return <input type="text" value={value} onChange={handleChange} />;
+  function handleInput(e) {
+    handleChange(e.target.value);
+  }
+
+  return <input type="text" value={value} onChange={handleInput} />;
 }
 
 function useErrorState(initialErrorState) {
   const [isError, setIsError] = useState(initialErrorState);
 
-  function isValidRgb() {
+  function isValidRgb(color) {
     if (!color || typeof color !== "string") return false;
 
     const splitColors = color.split(",");
 
-    cosnt[(r, g, b, a)] = splitColors.map((colorValue) =>
+    let [r, g, b, a] = splitColors.map((colorValue) =>
       Number(colorValue.trim())
     );
 
@@ -79,7 +105,7 @@ function useErrorState(initialErrorState) {
     return false;
   }
 
-  function isValidHex() {
+  function isValidHex(color) {
     if (!color || typeof color !== "string") return false;
 
     // Validate hex values
@@ -126,11 +152,22 @@ function HexValue() {
   const { checkIsValidAndSetErrorState, resetErrorState, isError } =
     useErrorState(false);
 
-  const hexColorConverter = (colorValue) => {};
+  const hexColorConverter = (colorValue) => {
+    checkIsValidAndSetErrorState(type, colorValue);
+    updateState({ value: colorValue, type: hexType });
+  };
+
+  const memoedHexValue = useMemo(() => {
+    if (isError) return colorValue;
+
+    if (type === hexType) return colorValue;
+
+    return rgbToHex(colorValue.split(",").map((color) => Number(color.trim())));
+  }, [colorValue, isError]);
 
   return (
     <>
-      <TextInput value={colorValue} handleChange={hexColorConverter} />
+      <TextInput value={memoedHexValue} handleChange={hexColorConverter} />
       {isError && <ErrorComponent />}
     </>
   );
@@ -141,11 +178,22 @@ function RGBValue() {
   const { checkIsValidAndSetErrorState, resetErrorState, isError } =
     useErrorState(false);
 
-  const rgbColorConverter = (colorValue) => {};
+  const rgbColorConverter = (colorValue) => {
+    checkIsValidAndSetErrorState(type, colorValue);
+    updateState({ type: rgbType, value: colorValue });
+  };
+
+  const memoedRgbValue = useMemo(() => {
+    if (isError) return colorValue;
+
+    if (type === rgbType) return colorValue;
+
+    return hexToRgb(colorValue).join(",");
+  }, [colorValue, isError]);
 
   return (
     <React.Fragment>
-      <TextInput value={colorValue} handleChange={rgbColorConverter} />
+      <TextInput value={memoedRgbValue} handleChange={rgbColorConverter} />
       {isError && <ErrorComponent />}
     </React.Fragment>
   );

@@ -2,7 +2,7 @@
 
 ## Data Structure
 
-This is about organizing data, so that, we can access and modify or query it later more efficiently and easily. or we can say, it means collection of data elements and relationship among them and operation or function that we can perform on them.
+This is about organizing data, so that, we can access and modify or query it(data) later in a more efficiently and easily. or we can say, it means collection of data elements and relationship among them and operation or function that we can perform on them.
 
 ### Why Data Structures?
 
@@ -29,7 +29,7 @@ Ex: Take our car engine, how it running we don't know, we just start the car it 
 Basically, we will ask two questions, when comes to measure performance.
 
 - How much time, My algorithm takes to finish? infinite time
-- How much space needed for my computation? all bytest of files on the internet.
+- How much space needed for my computation? all of files on the internet.
 
 To standardize the ways to talk about, how much space/time our algorithm needs to finish, theoratical analysts, invented the Big O notation.
 
