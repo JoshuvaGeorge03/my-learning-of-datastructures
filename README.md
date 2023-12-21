@@ -445,7 +445,7 @@ child node - descendant of other node. or extends from other node
 leaf node - node that don't have any child
 degree of node - which indicate, how may child the node have
 level nodes - root node is level 0 and their child is on level 1 and so on.
-height of node - number of edges connected b/w leaf node and particular node in the longest path
+height of node - number of edges connected b/w leaf node and root node in the longest path
 depth of node - number of edges connected b/w root node and particular node.
 
 **Traversing Tree**
