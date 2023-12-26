@@ -36,7 +36,37 @@ export class BinarTreeNode {
     return this.leftHeight - this.rightHeight;
   }
 
-  get uncle() {}
+  get uncle() {
+    if (!this.parent) {
+      return null;
+    }
+
+    if (!this.parent.parent) {
+      return null;
+    }
+
+    const grandParent = this.parent.parent;
+
+    if (grandParent.left && grandParent.right) {
+      // const onlyLeft = grandParent.left && !grandParent.right;
+
+      // const onlyRight = !grandParent.left && grandParent.right;
+
+      // if(onlyLeft) {
+      //   return grandParent.left;
+      // }
+
+      if (this.compare(this.parent, grandParent.left, (a, b) => a === b)) {
+        return grandParent.right ? grandParent.right : null;
+      }
+
+      if (this.compare(this.parent, grandParent.right, (a, b) => a === b)) {
+        return grandParent.left ? grandParent.left : null;
+      }
+    }
+
+    return null;
+  }
 
   setValue(value) {
     this.value = value;
@@ -68,7 +98,27 @@ export class BinarTreeNode {
     return this;
   }
 
-  removeChild() {}
+  removeChild(value) {
+    if (this.left && this.compare({ value }, this.left)) {
+      this.left.parent = null;
+      this.left = null;
+      return true;
+    }
+
+    if (this.right && this.compare({ value }, this.right)) {
+      this.right.parent = null;
+      this.right = null;
+      return true;
+    }
+    return false;
+  }
+
+  compare(node, otherNode, cb) {
+    if (cb) {
+      return cb(node, otherNode);
+    }
+    return node.value === otherNode.value;
+  }
 
   replaceChild() {}
 
