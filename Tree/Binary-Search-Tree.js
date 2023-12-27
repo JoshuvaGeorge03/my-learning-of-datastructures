@@ -1,16 +1,14 @@
 import { HashTable } from "../hash-table/HashTable";
 
 export class BinarTreeNode {
-  constructor(value = null) {
-    this.left = null;
-    this.right = null;
-    this.parent = null;
-    this.value = null;
+  constructor(value = null, left = null, right = null, parent = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+    this.parent = parent;
 
     this.meta = new HashTable();
   }
-
-  static copyNode() {}
 
   get leftHeight() {
     if (!this.left) {
@@ -56,11 +54,15 @@ export class BinarTreeNode {
       //   return grandParent.left;
       // }
 
-      if (this.compare(this.parent, grandParent.left, (a, b) => a === b)) {
+      if (
+        BinarTreeNode.compare(this.parent, grandParent.left, (a, b) => a === b)
+      ) {
         return grandParent.right ? grandParent.right : null;
       }
 
-      if (this.compare(this.parent, grandParent.right, (a, b) => a === b)) {
+      if (
+        BinarTreeNode.compare(this.parent, grandParent.right, (a, b) => a === b)
+      ) {
         return grandParent.left ? grandParent.left : null;
       }
     }
@@ -99,13 +101,13 @@ export class BinarTreeNode {
   }
 
   removeChild(value) {
-    if (this.left && this.compare({ value }, this.left)) {
+    if (this.left && BinarTreeNode.compare({ value }, this.left)) {
       this.left.parent = null;
       this.left = null;
       return true;
     }
 
-    if (this.right && this.compare({ value }, this.right)) {
+    if (this.right && BinarTreeNode.compare({ value }, this.right)) {
       this.right.parent = null;
       this.right = null;
       return true;
@@ -113,18 +115,48 @@ export class BinarTreeNode {
     return false;
   }
 
-  compare(node, otherNode, cb) {
+  replaceChild(nodeToReplace, replaceMentNode) {
+    if (nodeToReplace && replaceMentNode) {
+      if (this.left && BinarTreeNode.compare(nodeToReplace, this.left)) {
+        this.setLeft(nodeToReplace);
+        return true;
+      }
+
+      if (this.right && BinarTreeNode.compare(nodeToReplace, this.right)) {
+        this.setRight(replaceMentNode);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  traverseTreeInOrder(nodeToTraverse = this) {
+    if (this.left) {
+
+      console.log("this.left", this.left.value);
+      this.left.traverseTreeInOrder();
+
+    }
+    console.log("root", this.value);
+
+    if (this.right) {
+
+      console.log("this right", this.right.value);
+      this.right.traverseTreeInOrder();
+      
+    }
+  }
+
+  toString() {}
+
+  static compare(node, otherNode, cb) {
     if (cb) {
       return cb(node, otherNode);
     }
     return node.value === otherNode.value;
   }
 
-  replaceChild() {}
-
-  traverseTreeInOrder() {}
-
-  toString() {}
+  static copyNode() {}
 }
 
 export default class BinarySearchTree {
