@@ -1,4 +1,5 @@
 import { HashTable } from "../hash-table/HashTable";
+import { doNothingExceptReturningPassedArgument } from "../utils/default-value-assignment";
 
 export class BinarTreeNode {
   constructor(value = null, left = null, right = null, parent = null) {
@@ -130,24 +131,38 @@ export class BinarTreeNode {
     return false;
   }
 
-  traverseTreeInOrder(nodeToTraverse = this) {
+  traverseTreeInOrder(effectCb) {
     if (this.left) {
-
+      effectCb?.(this.left);
       console.log("this.left", this.left.value);
-      this.left.traverseTreeInOrder();
-
+      this.left.traverseTreeInOrder(effectCb);
     }
+
+    effectCb?.(this);
     console.log("root", this.value);
 
     if (this.right) {
-
+      effectCb?.(this.right);
       console.log("this right", this.right.value);
-      this.right.traverseTreeInOrder();
-      
+      this.right.traverseTreeInOrder(effectCb);
     }
   }
 
-  toString() {}
+  toArray(mappingFn = doNothingExceptReturningPassedArgument) {
+    const treeNodes = [];
+
+    const nodeCollectionCb = (node) => treeNodes.push(node);
+
+    this.traverseTreeInOrder(nodeCollectionCb);
+
+    return treeNodes.map((node) => mappingFn(node));
+  }
+
+  toString(stringyFierFn) {
+    return this.toArray((node) => node.value)
+      .map((value) => (stringyFierFn ? stringyFierFn(value) : value))
+      .toString();
+  }
 
   static compare(node, otherNode, cb) {
     if (cb) {
@@ -156,7 +171,11 @@ export class BinarTreeNode {
     return node.value === otherNode.value;
   }
 
-  static copyNode() {}
+  static copyNode(targetNode, sourceNode) {
+    targetNode.setRight(sourceNode.right);
+    targetNode.setLeft(sourceNode.left);
+    targetNode.setValue(sourceNode.value);
+  }
 }
 
 export default class BinarySearchTree {
