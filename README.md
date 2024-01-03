@@ -448,6 +448,11 @@ level nodes - root node is level 0 and their child is on level 1 and so on.
 height of node - number of edges connected b/w leaf node and root node in the longest path
 depth of node - number of edges connected b/w root node and particular node.
 
+P.S: what is the parent of the root node? basically, it has no parent, although, we can assign same root as parent of root node.
+ex: linux fileSystem tree structure, where parent of root directory is root directory.
+
+subtree - a  another tree that is entirely contained within this tree.
+
 **Traversing Tree**
 If we want to go to specific part of the tree and perform some operation, then we have do traverse to do that.
 
@@ -464,7 +469,7 @@ It is a Binary Tree which satisfies the BST invariant.
 
 BST invariant - left subtree has smaller elements then the value of the current node. and right subtree has larger elements than the current node.
 
-We need to put comparable data inside of binary search tree to maintain the BST invariant.z
+We need to put comparable data inside of binary search tree to maintain the BST invariant. Any data that cn be comparable can be put inside of BST.
 
 **Binary search Tree Traversal**
 
@@ -475,3 +480,31 @@ Pre-order Traversal -> Travel to root node then left and right node (prints the 
 Post Order Traversal -> Travel to left node then right node and then to root node (Traverse the left subtree followed by the right subtree then print the value of a node);
 
 level order traversal -> we want to print nodes as they appear one layer at a time
+
+**Binary Search Tree Insertion**
+
+-> Recurse down left subtree if the value is smaller
+-> Recurse down the right subtree, if value is larger.
+-> if value is equal do nothing
+-> if you hit a leaf node, create a new node.
+
+**Binary Search Tree Removal**
+
+Removal of the tree involves the two steps process
+
+1) finding the value in the tree, if it exists.
+2) Removing the value from the tree, and also find the successor value for that node to maintain the BST invariant.
+
+Finding the node involves four cases
+
+1) we have reached the leaf node, still not found the value.
+2) value is equal to 0 to the current node, then we have found it. 
+3) value is less than 0, then if the value exists, then the value is in left subtree.
+4) value is greater than 0, then if value exists, then the value is in right subtree.
+
+Removing elements and finding successor to maintain the BST invariant.
+
+1) if the node, we found is in leaf, then we just remove it, without any side effects.
+2) if the node, we found have left subtree, then we find the next root node in the children to be successor.
+3) if the node, we found have right subtree, then we find the next root node in the children to be successor.
+4) if the node, we found have both subtree, then we try to find larget value from the left subtree or smallest value from right subtree as successor node. this works, because, it will keep the BST invariant due to largest value in the left subtree means, everything below have smaller value. smaller value from the right subtree means, everything below will be larger values.
