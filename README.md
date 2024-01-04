@@ -456,9 +456,9 @@ subtree - a  another tree that is entirely contained within this tree.
 **Traversing Tree**
 If we want to go to specific part of the tree and perform some operation, then we have do traverse to do that.
 
-+ Pre-order - visit root node & then visit all nodes from left side & then visit all nodes from right side.
-+ In order - visit all node from left side & visit root node & visit all nodes from right side.
-+ Post order - visit all nodes from left side & vist all nodes from right side & visit root node.
++ Pre-order - visit root node(current node) & then visit all nodes from left side & then visit all nodes from right side.
++ In order - visit all node from left side & visit root(current node) node & visit all nodes from right side.
++ Post order - visit all nodes from left side & vist all nodes from right side & visit root(current node) node.
 
 **Binary Tree**
 + It is a tree with utmost 2 children.
