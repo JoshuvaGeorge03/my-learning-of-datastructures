@@ -488,6 +488,8 @@ level order traversal -> we want to print nodes as they appear one layer at a ti
 -> if value is equal do nothing
 -> if you hit a leaf node, create a new node.
 
+P.s: always, when inserting a node, it will always go to the leaf of the tree.
+
 **Binary Search Tree Removal**
 
 Removal of the tree involves the two steps process
