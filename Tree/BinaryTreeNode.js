@@ -1,7 +1,7 @@
 import { HashTable } from "../hash-table/HashTable";
 import { doNothingExceptReturningPassedArgument } from "../utils/default-value-assignment";
 
-export default class BinarTreeNode {
+export default class BinaryTreeNode {
     constructor(value = null, left = null, right = null, parent = null) {
       this.value = value;
       this.left = left;
@@ -56,13 +56,13 @@ export default class BinarTreeNode {
         // }
   
         if (
-          BinarTreeNode.compare(this.parent, grandParent.left, (a, b) => a === b)
+          BinaryTreeNode.compare(this.parent, grandParent.left, (a, b) => a === b)
         ) {
           return grandParent.right ? grandParent.right : null;
         }
   
         if (
-          BinarTreeNode.compare(this.parent, grandParent.right, (a, b) => a === b)
+          BinaryTreeNode.compare(this.parent, grandParent.right, (a, b) => a === b)
         ) {
           return grandParent.left ? grandParent.left : null;
         }
@@ -102,13 +102,13 @@ export default class BinarTreeNode {
     }
   
     removeChild(value) {
-      if (this.left && BinarTreeNode.compare({ value }, this.left)) {
+      if (this.left && BinaryTreeNode.compare({ value }, this.left)) {
         this.left.parent = null;
         this.left = null;
         return true;
       }
   
-      if (this.right && BinarTreeNode.compare({ value }, this.right)) {
+      if (this.right && BinaryTreeNode.compare({ value }, this.right)) {
         this.right.parent = null;
         this.right = null;
         return true;
@@ -118,12 +118,12 @@ export default class BinarTreeNode {
   
     replaceChild(nodeToReplace, replaceMentNode) {
       if (nodeToReplace && replaceMentNode) {
-        if (this.left && BinarTreeNode.compare(nodeToReplace, this.left)) {
+        if (this.left && BinaryTreeNode.compare(nodeToReplace, this.left)) {
           this.setLeft(nodeToReplace);
           return true;
         }
   
-        if (this.right && BinarTreeNode.compare(nodeToReplace, this.right)) {
+        if (this.right && BinaryTreeNode.compare(nodeToReplace, this.right)) {
           this.setRight(replaceMentNode);
           return true;
         }
